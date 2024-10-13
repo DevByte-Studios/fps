@@ -2,13 +2,15 @@ extends Camera3D
 
 @onready var head := %head
 @onready var camera := %head/Camera3D;
-@onready var raycast := %head/Camera3D/Raycast3D;
+@onready var raycast := %head/Camera3D/RayCast3D;
 @onready var fps_rig := $fps_rig
 @onready var animation_player := $fps_rig/shotgun/AnimationPlayer
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	raycast.add_exception(head.get_parent())
+	raycast.add_exception(head.get_parent().get_node('BulletHitbox'))
+
 	%head/SubViewportContainer/SubViewport.size = DisplayServer.window_get_size()
 
 
@@ -33,6 +35,12 @@ func _input(event: InputEvent) -> void:
 		sway(Vector2(event.relative.x, event.relative.y))
 
 func fire():
-	print('shoot')
 	animation_player.play("fire")
+
+	if raycast.is_colliding():
+		var collider = raycast.get_collider()
+		
+		if(collider is BulletHitbox):
+			collider._on_bullet_hit(10)
+
 

@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://cpw1sr25ca3m4"]
 
 [ext_resource type="Script" path="res://src/player/scripts/player.gd" id="1_4mqlm"]
-[ext_resource type="PackedScene" path="res://src/player/view_model_camera.tscn" id="2_fgaq1"]
+[ext_resource type="PackedScene" uid="uid://bmiw620bm21kw" path="res://src/player/view_model_camera.tscn" id="2_fgaq1"]
 [ext_resource type="PackedScene" uid="uid://iwlpamd20oko" path="res://addons/customizableCrosshair/crosshair/crosshair.tscn" id="3_grj5b"]
-[ext_resource type="PackedScene" uid="uid://uc200r5fuuec" path="res://src/components/health_component.tscn" id="4_3dxbr"]
-[ext_resource type="PackedScene" uid="uid://cv2pirqlts4bd" path="res://src/components/bullet_hitbox.tscn" id="5_dcomf"]
+[ext_resource type="PackedScene" path="res://src/components/health_component.tscn" id="4_3dxbr"]
+[ext_resource type="PackedScene" path="res://src/components/bullet_hitbox.tscn" id="5_dcomf"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0obu1"]
 
@@ -19,7 +19,6 @@ properties/0/replication_mode = 1
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_4mqlm")
-peer_id = null
 
 [node name="PhysicsCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -32,13 +31,13 @@ mesh = SubResource("CapsuleMesh_beto0")
 unique_name_in_owner = true
 
 [node name="Camera3D" type="Camera3D" parent="head"]
-unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80006, 0)
 cull_mask = 1048573
 
 [node name="RayCast3D" type="RayCast3D" parent="head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 target_position = Vector3(0, -100, 0)
+collision_mask = 2
 collide_with_areas = true
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="head"]
@@ -63,6 +62,7 @@ replication_config = SubResource("SceneReplicationConfig_ngjyo")
 label = NodePath("../HUD/Health")
 
 [node name="BulletHitbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_dcomf")]
+collision_layer = 2
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BulletHitbox"]

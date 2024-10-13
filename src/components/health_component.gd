@@ -20,3 +20,5 @@ func _on_damage(amount: int) -> void:
 	health = max(0, health - amount)
 	if health == 0:
 		on_death.emit()
+
+	update_label()

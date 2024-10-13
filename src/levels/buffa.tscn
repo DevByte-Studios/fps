@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://c1atqyt1eixeo"]
+[gd_scene load_steps=9 format=3 uid="uid://cjq7lnebp1hlj"]
 
 [ext_resource type="Texture2D" uid="uid://brwb7kp3c7ud3" path="res://assets/hdris/kloofendal_48d_partly_cloudy_puresky_2k.hdr" id="1_fy2ml"]
 [ext_resource type="Material" uid="uid://bxnxxr7w4a7fl" path="res://resources/materials/prototype/dark.tres" id="2_cl73g"]
-[ext_resource type="Material" uid="uid://dlr2af0t8oraw" path="res://resources/materials/prototype/purple.tres" id="3_m1krn"]
+[ext_resource type="Material" path="res://resources/materials/prototype/purple.tres" id="3_m1krn"]
 [ext_resource type="Material" uid="uid://bklaie6uh2f3w" path="res://resources/materials/prototype/orange.tres" id="3_u04w3"]
 [ext_resource type="Material" uid="uid://dcsykqpya52lw" path="res://resources/materials/prototype/light.tres" id="4_ivqaj"]
-[ext_resource type="PackedScene" uid="uid://cpw1sr25ca3m4" path="res://src/player/player.tscn" id="5_suipv"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_7lxhv"]
 panorama = ExtResource("1_fy2ml")
@@ -368,6 +367,3 @@ material_override = ExtResource("2_cl73g")
 use_collision = true
 polygon = PackedVector2Array(0.0308373, -0.0133806, -2.34648, 1.1744, 1.86731, -0.00523439)
 depth = 3.99
-
-[node name="1" parent="." instance=ExtResource("5_suipv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.1896, 0.0805974, 9.39355)

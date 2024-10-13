@@ -1,4 +1,4 @@
-extends Node
+extends Camera3D
 
 @onready var head := %head
 @onready var camera := %head/Camera3D;

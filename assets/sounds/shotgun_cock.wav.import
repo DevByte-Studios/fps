@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bojkkwa5m44t0"
-path="res://.godot/imported/shotgun_cock.wav-2ce36438066b8a6b3de5a0ced04cf392.sample"
+path="res://.godot/imported/shotgun_cock.wav-b5f8da4fd62855ac5fa1a00bace111fe.sample"
 
 [deps]
 
-source_file="res://assets/audio/shotgun_cock.wav"
-dest_files=["res://.godot/imported/shotgun_cock.wav-2ce36438066b8a6b3de5a0ced04cf392.sample"]
+source_file="res://assets/sounds/shotgun_cock.wav"
+dest_files=["res://.godot/imported/shotgun_cock.wav-b5f8da4fd62855ac5fa1a00bace111fe.sample"]
 
 [params]
 

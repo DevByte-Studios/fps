@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cpw1sr25ca3m4"]
+[gd_scene load_steps=7 format=3 uid="uid://cpw1sr25ca3m4"]
 
 [ext_resource type="Script" path="res://src/player/scripts/player.gd" id="1_4mqlm"]
 [ext_resource type="PackedScene" uid="uid://bmiw620bm21kw" path="res://src/player/view_model_camera.tscn" id="2_fgaq1"]
 [ext_resource type="PackedScene" uid="uid://iwlpamd20oko" path="res://addons/customizableCrosshair/crosshair/crosshair.tscn" id="3_grj5b"]
+[ext_resource type="Script" path="res://src/player/gun_manager.gd" id="4_7u83l"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5te5n"]
 
@@ -19,8 +20,10 @@ shape = SubResource("CapsuleShape3D_5te5n")
 mesh = SubResource("CapsuleMesh_beto0")
 
 [node name="head" type="Node3D" parent="."]
+unique_name_in_owner = true
 
 [node name="Camera3D" type="Camera3D" parent="head"]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.54021, 0)
 cull_mask = 1048573
 
@@ -40,3 +43,6 @@ render_target_update_mode = 4
 cull_mask = 1047554
 
 [node name="Crosshair" parent="." instance=ExtResource("3_grj5b")]
+
+[node name="GunManager" type="Node" parent="."]
+script = ExtResource("4_7u83l")

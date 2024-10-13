@@ -7,10 +7,7 @@ const JUMP_VELOCITY = 4.5
 @onready var head := $head
 @onready var camera := $head/Camera3D;
 
-
 func _physics_process(delta: float) -> void:
-	$head/SubViewportContainer/SubViewport/view_model_camera.global_transform = camera.global_transform
-
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -42,4 +39,3 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	$head/SubViewportContainer/SubViewport.size = DisplayServer.window_get_size()

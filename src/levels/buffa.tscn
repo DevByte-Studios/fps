@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c1atqyt1eixeo"]
+[gd_scene load_steps=8 format=3 uid="uid://c1atqyt1eixeo"]
 
 [ext_resource type="Texture2D" uid="uid://brwb7kp3c7ud3" path="res://assets/hdris/kloofendal_48d_partly_cloudy_puresky_2k.hdr" id="1_fy2ml"]
 [ext_resource type="Material" uid="uid://bxnxxr7w4a7fl" path="res://resources/materials/prototype/dark.tres" id="2_cl73g"]
@@ -18,8 +18,6 @@ sky = SubResource("Sky_osga6")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_otje0"]
-
 [node name="Node3D" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -28,10 +26,6 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_rpjod")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.60079, 2.25943, -2.02427)
-mesh = SubResource("CapsuleMesh_otje0")
 
 [node name="Level" type="Node3D" parent="."]
 
@@ -42,10 +36,10 @@ use_collision = true
 size = Vector3(9.1076, 1.36246, 14.7313)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.20306, 0.00759804, 1.42969)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.20306, 0.00759804, -0.288559)
 material_override = ExtResource("2_cl73g")
 use_collision = true
-size = Vector3(21.5939, 0.146, 17.1406)
+size = Vector3(21.5939, 0.146, 32.2959)
 
 [node name="CSGBox3D18" type="CSGBox3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.1322, 4.68035, -5.48874)
@@ -96,10 +90,10 @@ use_collision = true
 size = Vector3(3.93977, 2.26897, 1.00861)
 
 [node name="CSGBox3D13" type="CSGBox3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70831, 2.29134, 8.35458)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.05419, 2.29134, 8.23077)
 material_override = ExtResource("3_u04w3")
 use_collision = true
-size = Vector3(0.71417, 2.26897, 2.93543)
+size = Vector3(0.71417, 2.26897, 3.18305)
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.7608, 1.34477, 8.77316)
@@ -165,13 +159,16 @@ use_collision = true
 size = Vector3(0.168213, 2.28601, 8.08428)
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.48978, 0.0837664, 7.33171)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.44353, 0.0837664, 6.33585)
 material_override = ExtResource("2_cl73g")
-polygon = PackedVector2Array(0.0308373, -0.0133806, 0.0253603, 1.09375, 1.86731, -0.00523439)
+use_collision = true
+polygon = PackedVector2Array(0.0308373, -0.0133806, 0.0296202, 1.10073, 1.86731, -0.00523439)
 depth = 4.84
+smooth_faces = true
 
 [node name="CSGPolygon3D2" type="CSGPolygon3D" parent="Level"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11.0358, 0.0837664, 2.66427)
 material_override = ExtResource("2_cl73g")
+use_collision = true
 polygon = PackedVector2Array(0.0308373, -0.0133806, -2.34648, 1.1744, 1.86731, -0.00523439)
 depth = 3.99

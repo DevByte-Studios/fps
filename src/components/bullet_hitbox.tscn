@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cv2pirqlts4bd"]
+
+[ext_resource type="Script" path="res://src/components/bullet_hitbox.gd" id="1_u6fye"]
+
+[node name="BulletHitbox" type="Area3D"]
+script = ExtResource("1_u6fye")

@@ -1,21 +1,31 @@
-[gd_scene load_steps=6 format=3 uid="uid://cpw1sr25ca3m4"]
+[gd_scene load_steps=10 format=3 uid="uid://cpw1sr25ca3m4"]
 
 [ext_resource type="Script" path="res://src/player/scripts/player.gd" id="1_4mqlm"]
-[ext_resource type="PackedScene" uid="uid://bmiw620bm21kw" path="res://src/player/view_model_camera.tscn" id="2_fgaq1"]
+[ext_resource type="PackedScene" path="res://src/player/view_model_camera.tscn" id="2_fgaq1"]
 [ext_resource type="PackedScene" uid="uid://iwlpamd20oko" path="res://addons/customizableCrosshair/crosshair/crosshair.tscn" id="3_grj5b"]
+[ext_resource type="PackedScene" uid="uid://uc200r5fuuec" path="res://src/components/health_component.tscn" id="4_3dxbr"]
+[ext_resource type="PackedScene" uid="uid://cv2pirqlts4bd" path="res://src/components/bullet_hitbox.tscn" id="5_dcomf"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5te5n"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0obu1"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_beto0"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ngjyo"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hwxbt"]
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_4mqlm")
+peer_id = null
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="PhysicsCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_5te5n")
+shape = SubResource("CylinderShape3D_0obu1")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PhysicsCollider"]
 mesh = SubResource("CapsuleMesh_beto0")
 
 [node name="head" type="Node3D" parent="."]
@@ -23,7 +33,7 @@ unique_name_in_owner = true
 
 [node name="Camera3D" type="Camera3D" parent="head"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.54021, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80006, 0)
 cull_mask = 1048573
 
 [node name="RayCast3D" type="RayCast3D" parent="head/Camera3D"]
@@ -46,4 +56,33 @@ render_target_update_mode = 4
 [node name="view_model_camera" parent="head/SubViewportContainer/SubViewport" instance=ExtResource("2_fgaq1")]
 cull_mask = 1047554
 
-[node name="Crosshair" parent="." instance=ExtResource("3_grj5b")]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ngjyo")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("label") instance=ExtResource("4_3dxbr")]
+label = NodePath("../HUD/Health")
+
+[node name="BulletHitbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_dcomf")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BulletHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_hwxbt")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Crosshair" parent="HUD" instance=ExtResource("3_grj5b")]
+layout_mode = 1
+offset_left = 556.0
+offset_top = 304.0
+offset_right = 556.0
+offset_bottom = 304.0
+
+[node name="Health" type="Label" parent="HUD"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0

@@ -1,0 +1,97 @@
+[gd_scene load_steps=4 format=3 uid="uid://ep5s0xbmyn22"]
+
+[ext_resource type="Script" path="res://src/net_old/multiplayer.gd" id="1_ahe7v"]
+[ext_resource type="PackedScene" uid="uid://c01hh4tc0tect" path="res://src/net_old/net_player.tscn" id="2_qfuqc"]
+[ext_resource type="PackedScene" uid="uid://nyyjfjwh3wpj" path="res://src/levels/connor_world.tscn" id="2_skl6e"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_ahe7v")
+player_prefab = ExtResource("2_qfuqc")
+
+[node name="ConnectionPanel" type="Window" parent="."]
+auto_translate_mode = 1
+title = "Online"
+position = Vector2i(0, 36)
+size = Vector2i(500, 150)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConnectionPanel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+theme_override_constants/separation = 10
+
+[node name="GridContainer" type="GridContainer" parent="ConnectionPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
+
+[node name="HostLabel" type="Label" parent="ConnectionPanel/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Host"
+
+[node name="HostField" type="LineEdit" parent="ConnectionPanel/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "127.0.0.1"
+
+[node name="PortLabel" type="Label" parent="ConnectionPanel/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Port"
+
+[node name="PortField" type="LineEdit" parent="ConnectionPanel/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "9999"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ConnectionPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="ServerButton" type="Button" parent="ConnectionPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Server"
+
+[node name="ClientButton" type="Button" parent="ConnectionPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Client"
+
+[node name="SpectatorButton" type="Button" parent="ConnectionPanel/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Spectator"
+
+[node name="MessageLabel" type="Label" parent="."]
+offset_left = 697.0
+offset_top = 15.0
+offset_right = 737.0
+offset_bottom = 38.0
+
+[node name="SyncLostLabel" type="Label" parent="."]
+visible = false
+offset_left = 1005.0
+offset_top = 125.0
+offset_right = 1078.0
+offset_bottom = 148.0
+text = "Sync Lost
+"
+
+[node name="ConnorWorld" parent="." instance=ExtResource("2_skl6e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.023056, -0.0632133, 0.0531969)
+
+[node name="GameWorld" type="Node3D" parent="."]
+
+[node name="Players" type="Node3D" parent="GameWorld"]
+
+[node name="Camera3D" type="Camera3D" parent="GameWorld"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 4, 14)
+
+[connection signal="pressed" from="ConnectionPanel/VBoxContainer/HBoxContainer/ServerButton" to="." method="_on_server_button_pressed"]
+[connection signal="pressed" from="ConnectionPanel/VBoxContainer/HBoxContainer/ClientButton" to="." method="_on_client_button_pressed"]

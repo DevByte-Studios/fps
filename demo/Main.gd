@@ -36,20 +36,11 @@ func _ready() -> void:
 	elif "client" in cmdline_args:
 		_on_ClientButton_pressed()
 
-	if SyncReplay.active:
-		main_menu.visible = false
-		connection_panel.visible = false
-		reset_button.visible = false
+	# if SyncReplay.active:
+	# 	main_menu.visible = false
+	# 	connection_panel.visible = false
+	# 	reset_button.visible = false
 
-func _on_OnlineButton_pressed() -> void:
-	connection_panel.popup_centered()
-	SyncManager.reset_network_adaptor()
-
-func _on_LocalButton_pressed() -> void:
-	main_menu.visible = false
-	$ServerPlayer.input_prefix = "player2_"
-	SyncManager.network_adaptor = DummyNetworkAdaptor.new()
-	SyncManager.start()
 
 func _on_ServerButton_pressed() -> void:
 	var peer = ENetMultiplayerPeer.new()
@@ -76,6 +67,7 @@ func _start_client() -> void:
 
 func _on_peer_connected(peer_id: int):
 	# Tell sibling peers about ourselves.
+
 	if not multiplayer.is_server() and peer_id != 1:
 		register_player.rpc_id(peer_id, {})
 
@@ -114,7 +106,7 @@ func register_player(options: Dictionary = {}) -> void:
 func _on_SyncManager_sync_started() -> void:
 	message_label.text = "Started!"
 
-	if logging_enabled and not SyncReplay.active:
+	if logging_enabled: # and not SyncReplay.active:
 		if not DirAccess.dir_exists_absolute(LOG_FILE_DIRECTORY):
 			DirAccess.make_dir_absolute(LOG_FILE_DIRECTORY)
 
@@ -165,4 +157,3 @@ func setup_match_for_replay(my_peer_id: int, peer_ids: Array, _match_info: Dicti
 	else:
 		client_peer_id = my_peer_id
 	$ClientPlayer.set_multiplayer_authority(client_peer_id)
-

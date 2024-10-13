@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c01hh4tc0tect"]
+
+[ext_resource type="Script" path="res://src/net_old/net_player.gd" id="1_f6e5y"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_iv7sm"]
+
+[node name="NetPlayer" type="CharacterBody3D"]
+script = ExtResource("1_f6e5y")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("TorusMesh_iv7sm")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.376548, 0.926397, 0, -0.926397, 0.376548, 0, 10.4497, 0)

@@ -1,4 +1,5 @@
-extends Node2D
+class_name NetPlayer
+extends CharacterBody3D
 
 const Bomb = preload("res://demo/Bomb.tscn")
 
@@ -7,14 +8,21 @@ var input_prefix := "ui_"
 var speed := 0.0
 var spawn_parent: Node2D
 
+func _process(_delta):
+	print(str(multiplayer.get_unique_id()) + " " + str(get_multiplayer_authority()))
+	if is_multiplayer_authority():
+		$Camera3D.current = true
+
+
+
 func _get_local_input() -> Dictionary:
-	var input_vector = Input.get_vector(input_prefix + "left", input_prefix + "right", input_prefix + "up", input_prefix + "down")
+	var input_vector = Input.get_vector("left", "right", "forward", "backward")
 	
 	var input := {}
 	if input_vector != Vector2.ZERO:
 		input["input_vector"] = input_vector
-	if Input.is_action_just_pressed(input_prefix + "bomb"):
-		input["drop_bomb"] = true
+	# if Input.is_action_just_pressed(input_prefix + "bomb"):
+	# 	input["drop_bomb"] = true
 	
 	return input
 
@@ -32,8 +40,8 @@ func _network_process(input: Dictionary) -> void:
 	else:
 		speed = 0.0
 	
-	if input.get("drop_bomb", false):
-		SyncManager.spawn("Bomb", spawn_parent, Bomb, { position = global_position })
+	# if input.get("drop_bomb", false):
+	# 	SyncManager.spawn("Bomb", spawn_parent, Bomb, { position = global_position })
 
 func _save_state() -> Dictionary:
 	return {

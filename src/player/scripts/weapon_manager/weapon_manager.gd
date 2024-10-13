@@ -5,6 +5,7 @@ extends Camera3D
 @onready var raycast := %head/Camera3D/RayCast3D;
 @onready var fps_rig := $fps_rig
 @onready var animation_player := $fps_rig/shotgun/AnimationPlayer
+@onready var audio_player = $AudioStreamPlayer3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -42,5 +43,8 @@ func fire():
 		
 		if(collider is BulletHitbox):
 			collider._on_bullet_hit(10)
+
+		# play gun shot audio
+
 
 

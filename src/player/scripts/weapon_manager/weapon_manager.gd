@@ -5,7 +5,9 @@ extends Camera3D
 @onready var raycast := %head/Camera3D/RayCast3D;
 @onready var fps_rig := $fps_rig
 @onready var animation_player := $fps_rig/shotgun/AnimationPlayer
-@onready var audio_player = $AudioStreamPlayer3D
+
+var gunshot_sound
+var shotgun_cock_sound
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,6 +16,9 @@ func _ready() -> void:
 
 	%head/SubViewportContainer/SubViewport.size = DisplayServer.window_get_size()
 
+	# prepare gunshot sound
+	gunshot_sound = preload("res://assets/sounds/shotgun_fire.mp3")
+	shotgun_cock_sound = preload("res://assets/sounds/shotgun_cock.wav")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -35,16 +40,32 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		sway(Vector2(event.relative.x, event.relative.y))
 
-func fire():
-	animation_player.play("fire")
+func play_sound(stream):
+	if not stream:
+		print('Error: Invalid audio stream')
+		
+	var audioPlayer = AudioStreamPlayer3D.new()
+	add_child(audioPlayer)
+	audioPlayer.stream = stream
+	audioPlayer.play()
 
+	await audioPlayer.finished
+	audioPlayer.queue_free()
+
+
+func fire():
 	if raycast.is_colliding():
 		var collider = raycast.get_collider()
 		
 		if(collider is BulletHitbox):
 			collider._on_bullet_hit(10)
 
-		# play gun shot audio
+	animation_player.play("fire")
+
+	play_sound(gunshot_sound)
+
+	await get_tree().create_timer(0.5).timeout
+	play_sound(shotgun_cock_sound)
 
 
 

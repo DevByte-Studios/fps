@@ -1198,5 +1198,3 @@ surface_material_override/0 = ExtResource("2_0nixu")
 libraries = {
 "": SubResource("AnimationLibrary_i01q0")
 }
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]

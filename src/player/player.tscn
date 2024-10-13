@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://src/player/scripts/player.gd" id="1_4mqlm"]
 [ext_resource type="PackedScene" uid="uid://bmiw620bm21kw" path="res://src/player/view_model_camera.tscn" id="2_fgaq1"]
 [ext_resource type="PackedScene" uid="uid://iwlpamd20oko" path="res://addons/customizableCrosshair/crosshair/crosshair.tscn" id="3_grj5b"]
-[ext_resource type="Script" path="res://src/player/gun_manager.gd" id="4_7u83l"]
+[ext_resource type="Script" path="res://src/player/scripts/weapon_manager.gd" id="4_un106"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_5te5n"]
 
@@ -44,5 +44,5 @@ cull_mask = 1047554
 
 [node name="Crosshair" parent="." instance=ExtResource("3_grj5b")]
 
-[node name="GunManager" type="Node" parent="."]
-script = ExtResource("4_7u83l")
+[node name="WeaponManager" type="Node" parent="."]
+script = ExtResource("4_un106")

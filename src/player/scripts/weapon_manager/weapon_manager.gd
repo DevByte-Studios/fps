@@ -2,6 +2,7 @@ extends Camera3D
 
 @onready var head := %head
 @onready var camera := %head/Camera3D;
+@onready var raycast := %head/Camera3D/Raycast3D;
 @onready var fps_rig := $fps_rig
 @onready var animation_player := $fps_rig/shotgun/AnimationPlayer
 

@@ -2,10 +2,16 @@ extends Node
 
 @onready var match_manager: Match = %Match
 
+@onready var map_selector: OptionButton = $Control/Options/Host/OptionButton
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
+
+	for map in (%LevelManager as LevelManager).levels:
+		map_selector.add_item(map.level_name)
 
 func _on_peer_connected(peer_id: int) -> void:
 	if multiplayer.is_server():
@@ -32,7 +38,9 @@ func _on_host_button_pressed() -> void:
 	multiplayer.multiplayer_peer = peer
 	$Control.queue_free()
 
-	match_manager.s_start()
+	match_manager.s_start(
+		map_selector.get_item_text(map_selector.selected)
+	)
 
 	var server_is_player = true
 	if server_is_player:

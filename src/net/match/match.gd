@@ -54,9 +54,9 @@ func s_player_died(peer_id: int) -> void:
 		player_mangaer.s_spawn_player(peer_id, find_spawn_point(peer_id))
 	)
 
-func s_start() -> void:
+func s_start(map: String = "buffa") -> void:
 	running = true
-	s_change_level("buffa")
+	s_change_level(map)
 	current_game_mode = "deathmatch"
 
 func s_change_level(level_name: String) -> void:

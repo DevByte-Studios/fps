@@ -2,16 +2,7 @@
 class_name LevelManager
 extends Node
 
-@export var levels: Dictionary = {}
-
-func _ready():
-	levels = {}
-	for child in get_children():
-		if child is LevelInstance:
-			levels[child.level_name] = child
-	
-	print("LevelManager ready")
-	print(levels)
+@export var levels: Array[LevelInstance]
 
 @export var level_container: Node3D = null
 
@@ -23,5 +14,5 @@ func change_level(level_name: String) -> void:
 
 
 	# then add the new level
-	var level_instance = levels.get(level_name).scene.instantiate()
+	var level_instance = levels[levels.find(func (x): x.level_name == level_name)].scene.instantiate()
 	level_container.add_child(level_instance)

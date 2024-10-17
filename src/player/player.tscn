@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cpw1sr25ca3m4"]
+[gd_scene load_steps=12 format=3 uid="uid://cpw1sr25ca3m4"]
 
 [ext_resource type="Script" path="res://src/player/scripts/player.gd" id="1_4mqlm"]
 [ext_resource type="PackedScene" uid="uid://bmiw620bm21kw" path="res://src/player/view_model_camera.tscn" id="2_fgaq1"]
@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://cv2pirqlts4bd" path="res://src/components/bullet_hitbox.tscn" id="5_dcomf"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0obu1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gnoh6"]
+albedo_color = Color(0, 0.572156, 0.893107, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_beto0"]
 
@@ -17,15 +20,18 @@ properties/0/replication_mode = 1
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hwxbt"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_in7j1"]
+font_size = 60
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_4mqlm")
-peer_id = null
 
 [node name="PhysicsCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_0obu1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PhysicsCollider"]
+material_override = SubResource("StandardMaterial3D_gnoh6")
 mesh = SubResource("CapsuleMesh_beto0")
 
 [node name="head" type="Node3D" parent="."]
@@ -80,9 +86,21 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Health" type="Label" parent="HUD"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "100"
+label_settings = SubResource("LabelSettings_in7j1")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="HUD"]
 layout_mode = 1

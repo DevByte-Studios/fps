@@ -4,7 +4,7 @@ extends CharacterBody3D
 
 const JUMP_VELOCITY = 8
 
-const GRAVITY = -30
+const GRAVITY = -25
 
 @export var peer_id: int = -1
 
@@ -57,7 +57,7 @@ func _physics_process(delta: float) -> void:
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	var is_walking = Input.is_action_pressed("walk")
-	var SPEED = 2.0 if is_walking else 4.0
+	var SPEED = 2.3 if is_walking else 5.0
 
 
 	var acceleration = 10.0 if is_on_floor() else 5.0

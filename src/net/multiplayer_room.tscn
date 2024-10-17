@@ -49,11 +49,14 @@ layout_mode = 2
 text = "Join"
 
 [node name="Match" parent="." instance=ExtResource("3_d4j5o")]
+unique_name_in_owner = true
 
 [node name="LevelManager" parent="." node_paths=PackedStringArray("level_container") instance=ExtResource("4_n6b5w")]
+unique_name_in_owner = true
 level_container = NodePath("../GameWorld/Level")
 
 [node name="PlayerManager" parent="." node_paths=PackedStringArray("player_container") instance=ExtResource("5_0ax6j")]
+unique_name_in_owner = true
 player_container = NodePath("../GameWorld/Players")
 player_prefab = ExtResource("5_4e74c")
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjq7lnebp1hlj"]
+[gd_scene load_steps=10 format=3 uid="uid://cjq7lnebp1hlj"]
 
 [ext_resource type="Texture2D" uid="uid://brwb7kp3c7ud3" path="res://assets/hdris/kloofendal_48d_partly_cloudy_puresky_2k.hdr" id="1_fy2ml"]
 [ext_resource type="Material" uid="uid://bxnxxr7w4a7fl" path="res://resources/materials/prototype/dark.tres" id="2_cl73g"]
-[ext_resource type="Material" path="res://resources/materials/prototype/purple.tres" id="3_m1krn"]
+[ext_resource type="Material" uid="uid://dlr2af0t8oraw" path="res://resources/materials/prototype/purple.tres" id="3_m1krn"]
 [ext_resource type="Material" uid="uid://bklaie6uh2f3w" path="res://resources/materials/prototype/orange.tres" id="3_u04w3"]
 [ext_resource type="Material" uid="uid://dcsykqpya52lw" path="res://resources/materials/prototype/light.tres" id="4_ivqaj"]
+[ext_resource type="PackedScene" uid="uid://dkvdoqex8d6dt" path="res://src/levels/utils/spawn_point/spawn_point.tscn" id="6_7yg2u"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_7lxhv"]
 panorama = ExtResource("1_fy2ml")
@@ -367,3 +368,32 @@ material_override = ExtResource("2_cl73g")
 use_collision = true
 polygon = PackedVector2Array(0.0308373, -0.0133806, -2.34648, 1.1744, 1.86731, -0.00523439)
 depth = 3.99
+
+[node name="SpawnPoints" type="Node3D" parent="."]
+
+[node name="SpawnPoint" parent="SpawnPoints" instance=ExtResource("6_7yg2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.7286, 1.25943, 0)
+
+[node name="SpawnPoint2" parent="SpawnPoints" instance=ExtResource("6_7yg2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.685, 4.75335, -5.80086)
+
+[node name="SpawnPoint3" parent="SpawnPoints" instance=ExtResource("6_7yg2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85563, 1.17797, 2.25149)
+
+[node name="SpawnPoint4" parent="SpawnPoints" instance=ExtResource("6_7yg2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.42549, 0.0805981, 12.5443)
+
+[node name="SpawnPoint5" parent="SpawnPoints" instance=ExtResource("6_7yg2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1688, 1.25943, 5.64561)
+
+[node name="SpawnPoint6" parent="SpawnPoints" instance=ExtResource("6_7yg2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.1688, 1.25943, 5.64561)
+
+[node name="SpawnPoint7" parent="SpawnPoints" instance=ExtResource("6_7yg2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6443, 0.0805979, -9.04555)
+
+[node name="SpawnPoint8" parent="SpawnPoints" instance=ExtResource("6_7yg2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.01417, 0.0805979, -8.58683)
+
+[node name="SpawnPoint9" parent="SpawnPoints" instance=ExtResource("6_7yg2u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.95015, 2.13134, -10.2073)

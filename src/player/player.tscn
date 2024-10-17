@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://src/player/scripts/player.gd" id="1_4mqlm"]
 [ext_resource type="PackedScene" uid="uid://bmiw620bm21kw" path="res://src/player/view_model_camera.tscn" id="2_fgaq1"]
 [ext_resource type="PackedScene" uid="uid://iwlpamd20oko" path="res://addons/customizableCrosshair/crosshair/crosshair.tscn" id="3_grj5b"]
-[ext_resource type="PackedScene" path="res://src/components/health_component.tscn" id="4_3dxbr"]
-[ext_resource type="PackedScene" path="res://src/components/bullet_hitbox.tscn" id="5_dcomf"]
+[ext_resource type="PackedScene" uid="uid://uc200r5fuuec" path="res://src/components/health_component.tscn" id="4_3dxbr"]
+[ext_resource type="PackedScene" uid="uid://cv2pirqlts4bd" path="res://src/components/bullet_hitbox.tscn" id="5_dcomf"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0obu1"]
 
@@ -19,6 +19,7 @@ properties/0/replication_mode = 1
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_4mqlm")
+peer_id = null
 
 [node name="PhysicsCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -71,20 +72,29 @@ shape = SubResource("CapsuleShape3D_hwxbt")
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Crosshair" parent="HUD" instance=ExtResource("3_grj5b")]
-layout_mode = 1
-offset_left = 556.0
-offset_top = 304.0
-offset_right = 556.0
-offset_bottom = 304.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [node name="Health" type="Label" parent="HUD"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
+[node name="CenterContainer" type="CenterContainer" parent="HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Crosshair" parent="HUD/CenterContainer" instance=ExtResource("3_grj5b")]
+layout_mode = 2
+
 [node name="AudioListener3D" type="AudioListener3D" parent="."]
+
+[connection signal="on_death" from="HealthComponent" to="." method="on_died"]

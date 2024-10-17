@@ -1,32 +1,19 @@
 extends Node
 
-
-@onready var player_spawner := $GameWorld/Players
-
-@export var player_prefab: PackedScene
+@onready var match_manager: Match = $Match
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 
-func spawn_player(peer_id: int) -> void:
-	var player = player_prefab.instantiate()
-	player.peer_id = peer_id
-	player.name = str(peer_id)
-	player_spawner.add_child(player)
-
-
 func _on_peer_connected(peer_id: int) -> void:
 	if multiplayer.is_server():
-		spawn_player(peer_id)
+		match_manager.client_connected(peer_id)
 
 func _on_peer_disconnected(peer_id: int) -> void:
-	pass
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	if multiplayer.is_server():
+		match_manager.client_disconnected(peer_id)
 
 const PORT = 4433
 
@@ -45,4 +32,8 @@ func _on_host_button_pressed() -> void:
 	multiplayer.multiplayer_peer = peer
 	$Control.queue_free()
 
-	spawn_player(1)
+	match_manager.s_start()
+
+	var server_is_player = true
+	if server_is_player:
+		match_manager.client_connected(multiplayer.get_unique_id())

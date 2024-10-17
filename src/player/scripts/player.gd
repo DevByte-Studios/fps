@@ -6,10 +6,15 @@ const JUMP_VELOCITY = 8
 
 const GRAVITY = -30
 
-@export var peer_id: int
+@export var peer_id: int = -1
 
 @onready var head := $head
 @onready var camera := $head/Camera3D;
+
+
+@rpc("authority", "call_local")
+func c_spawn_at(spawn_location: Vector3) -> void:
+	global_transform.origin = spawn_location
 
 func _ready():
 	peer_id = name.to_int()
@@ -44,6 +49,7 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and can_jump:
 		velocity.y = JUMP_VELOCITY
+		jump_cayote_window = 0
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
@@ -72,3 +78,17 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x - event.relative.y * MOUSE_SENSITIVITY, -1.5, 1.5)
+
+
+func on_died():
+	print("I died")
+	peer_on_died.rpc()
+
+@onready var match_manager = get_tree().root.get_node("MultiplayerRoom").get_node("Match") as Match
+
+@rpc("any_peer", "call_local")
+func peer_on_died():
+	print("peer_on_died")
+	queue_free()
+	if multiplayer.is_server():
+		match_manager.s_player_died(peer_id)

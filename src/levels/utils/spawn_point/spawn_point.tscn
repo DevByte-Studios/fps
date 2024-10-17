@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dkvdoqex8d6dt"]
+
+[ext_resource type="Script" path="res://src/levels/utils/spawn_point/spawn_point.gd" id="1_5u4ko"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0lo0d"]
+
+[node name="SpawnPoint" type="Node3D"]
+script = ExtResource("1_5u4ko")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_0lo0d")
+skeleton = NodePath("")

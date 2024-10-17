@@ -1,27 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://bld8ct8mxkuv"]
+[gd_scene load_steps=6 format=3 uid="uid://bld8ct8mxkuv"]
 
 [ext_resource type="Script" path="res://src/net/multiplayer_room.gd" id="1_e4oo2"]
-[ext_resource type="PackedScene" uid="uid://c1atqyt1eixeo" path="res://src/levels/buffa.tscn" id="2_aplai"]
-[ext_resource type="PackedScene" uid="uid://cpw1sr25ca3m4" path="res://src/player/player.tscn" id="2_xoytm"]
+[ext_resource type="PackedScene" uid="uid://bkcclf55owtfx" path="res://src/net/match/match.tscn" id="3_d4j5o"]
+[ext_resource type="PackedScene" uid="uid://cqge0b5j8indd" path="res://src/net/level_manager/level_manager.tscn" id="4_n6b5w"]
+[ext_resource type="PackedScene" uid="uid://dyiv2phty8616" path="res://src/net/player_manager/player_manager.tscn" id="5_0ax6j"]
+[ext_resource type="PackedScene" uid="uid://cpw1sr25ca3m4" path="res://src/player/player.tscn" id="5_4e74c"]
 
 [node name="MultiplayerRoom" type="Node"]
 script = ExtResource("1_e4oo2")
-player_prefab = ExtResource("2_xoytm")
 
 [node name="GameWorld" type="Node3D" parent="."]
 
 [node name="Players" type="Node3D" parent="GameWorld"]
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="GameWorld/Players"]
-_spawnable_scenes = PackedStringArray("res://src/player/player.tscn")
-spawn_path = NodePath("..")
-
 [node name="Camera3D" type="Camera3D" parent="GameWorld"]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 17.2701, 16.5805)
 
 [node name="Level" type="Node3D" parent="GameWorld"]
-
-[node name="Node3D" parent="GameWorld/Level" instance=ExtResource("2_aplai")]
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -52,6 +47,15 @@ text = "127.0.0.1"
 [node name="JoinButton" type="Button" parent="Control/Options/Join"]
 layout_mode = 2
 text = "Join"
+
+[node name="Match" parent="." instance=ExtResource("3_d4j5o")]
+
+[node name="LevelManager" parent="." node_paths=PackedStringArray("level_container") instance=ExtResource("4_n6b5w")]
+level_container = NodePath("../GameWorld/Level")
+
+[node name="PlayerManager" parent="." node_paths=PackedStringArray("player_container") instance=ExtResource("5_0ax6j")]
+player_container = NodePath("../GameWorld/Players")
+player_prefab = ExtResource("5_4e74c")
 
 [connection signal="pressed" from="Control/Options/Host/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="Control/Options/Join/JoinButton" to="." method="_on_join_button_pressed"]

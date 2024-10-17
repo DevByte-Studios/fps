@@ -4,7 +4,7 @@ class_name Match extends Node
 @export var current_game_mode: String = "deathmatch"
 @export var current_level_name: String = ""
 
-@onready var player_mangaer: PlayerManager = $"../PlayerManager"
+@onready var player_mangaer: PlayerManager = %PlayerManager
 
 
 func _ready():
@@ -18,7 +18,7 @@ func client_connected(peer_id: int) -> void:
 	# ensure the client is up to speed
 	if current_level_name != "":
 		print("Sending level to client")
-		($"../LevelManager" as LevelManager).change_level.rpc_id(peer_id, current_level_name)
+		(%LevelManager as LevelManager).change_level.rpc_id(peer_id, current_level_name)
 	player_mangaer.s_spawn_existing_for(peer_id)
 
 	print("Spawning client " + str(peer_id))
@@ -61,4 +61,4 @@ func s_start() -> void:
 
 func s_change_level(level_name: String) -> void:
 	current_level_name = level_name
-	($"../LevelManager" as LevelManager).change_level.rpc(level_name)
+	(%LevelManager as LevelManager).change_level.rpc(level_name)

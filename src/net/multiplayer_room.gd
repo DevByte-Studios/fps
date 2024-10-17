@@ -1,6 +1,6 @@
 extends Node
 
-@onready var match_manager: Match = $Match
+@onready var match_manager: Match = %Match
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

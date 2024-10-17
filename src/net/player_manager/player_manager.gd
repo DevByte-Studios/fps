@@ -4,7 +4,7 @@ class_name PlayerManager extends Node
 @export var player_container: Node3D = null
 @export var player_prefab: PackedScene
 
-@onready var match: Match = $"../Match"
+@onready var match: Match = %Match
 
 # peer id -> player node
 var s_players: Dictionary = {}

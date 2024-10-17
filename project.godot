@@ -15,14 +15,6 @@ run/main_scene="res://src/net/multiplayer_room.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
-
-SyncManager="*res://addons/delta_rollback/SyncManager.gd"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/delta_rollback/plugin.cfg")
-
 [input]
 
 forward={

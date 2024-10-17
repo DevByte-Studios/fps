@@ -27,6 +27,7 @@ func _ready():
 	else:
 		$HUD.queue_free()
 		$head.queue_free()
+		$WeaponManager.queue_free()
 
 var jump_cayote_window = 0
 func _physics_process(delta: float) -> void:

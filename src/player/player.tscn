@@ -1,10 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://cpw1sr25ca3m4"]
+[gd_scene load_steps=13 format=3 uid="uid://cpw1sr25ca3m4"]
 
 [ext_resource type="Script" path="res://src/player/scripts/player.gd" id="1_4mqlm"]
 [ext_resource type="PackedScene" uid="uid://bmiw620bm21kw" path="res://src/player/view_model_camera.tscn" id="2_fgaq1"]
 [ext_resource type="PackedScene" uid="uid://iwlpamd20oko" path="res://addons/customizableCrosshair/crosshair/crosshair.tscn" id="3_grj5b"]
-[ext_resource type="PackedScene" uid="uid://uc200r5fuuec" path="res://src/components/health_component.tscn" id="4_3dxbr"]
-[ext_resource type="PackedScene" uid="uid://cv2pirqlts4bd" path="res://src/components/bullet_hitbox.tscn" id="5_dcomf"]
+[ext_resource type="PackedScene" path="res://src/components/health_component.tscn" id="4_3dxbr"]
+[ext_resource type="PackedScene" path="res://src/components/bullet_hitbox.tscn" id="5_dcomf"]
+[ext_resource type="Script" path="res://src/components/weapon_manager.gd" id="6_wjwxp"]
+[ext_resource type="Script" path="res://src/weapons/weapon_config.gd" id="7_ks5gy"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0obu1"]
 
@@ -19,6 +21,17 @@ properties/0/spawn = true
 properties/0/replication_mode = 1
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hwxbt"]
+
+[sub_resource type="Resource" id="Resource_i7nmf"]
+script = ExtResource("7_ks5gy")
+display_name = "Shotgun"
+model_name = "shotgun"
+view_model_name = "shotgun"
+magazine_size = 8
+reserve_ammo = 8
+has_crosshair = true
+base_damage = 8
+armor_penetration = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_in7j1"]
 font_size = 60
@@ -115,5 +128,12 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="AudioListener3D" type="AudioListener3D" parent="."]
+
+[node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("head", "raycast", "view_model")]
+script = ExtResource("6_wjwxp")
+head = NodePath("../head")
+raycast = NodePath("../head/Camera3D/RayCast3D")
+view_model = NodePath("../head/SubViewportContainer/SubViewport/view_model_camera")
+guns = Array[ExtResource("7_ks5gy")]([SubResource("Resource_i7nmf")])
 
 [connection signal="on_death" from="HealthComponent" to="." method="on_died"]

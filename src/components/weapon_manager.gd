@@ -66,9 +66,19 @@ func attack() -> void:
 		
 			if(collider is BulletHitbox):
 				collider._on_bullet_hit(current_weapon.weapon_type.base_damage)
-
 	else:
-		print("Error: Out of ammo")
+		reload()
+
+func reload():
+	var current_weapon = get_current_weapon()
+	if !current_weapon:
+		print("Error: No weapon selected")
+		return
+
+	if current_weapon.ammo < current_weapon.weapon_type.magazine_size:
+		current_weapon.ammo = current_weapon.weapon_type.magazine_size
+	else:
+		print("Error: Weapon is already full")
 
 
 # Handle weapon swtiching and attack

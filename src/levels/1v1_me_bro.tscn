@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://coj7d24tc5fb4"]
+
+[ext_resource type="Material" uid="uid://dlr2af0t8oraw" path="res://resources/materials/prototype/purple.tres" id="1_grfln"]
+[ext_resource type="PackedScene" uid="uid://dkvdoqex8d6dt" path="res://src/levels/utils/spawn_point/spawn_point.tscn" id="2_846jl"]
+
+[node name="1v1" type="Node3D"]
+
+[node name="Level" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.35991, 0)
+material_override = ExtResource("1_grfln")
+size = Vector3(20, 8.81982, 20)
+
+[node name="SpawnPoints" type="Node3D" parent="."]
+
+[node name="SpawnPoint" parent="." instance=ExtResource("2_846jl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.36512, 0, 4.66918)

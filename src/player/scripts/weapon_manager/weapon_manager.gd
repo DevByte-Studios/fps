@@ -6,19 +6,16 @@ extends Camera3D
 @onready var fps_rig := $fps_rig
 @onready var animation_player := $fps_rig/shotgun/AnimationPlayer
 
-var gunshot_sound
-var shotgun_cock_sound
+# Gun variables
+
+var gunshot_sound # remove and add to config
+
+#####################
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	raycast.add_exception(head.get_parent())
-	raycast.add_exception(head.get_parent().get_node('BulletHitbox'))
 
 	%head/SubViewportContainer/SubViewport.size = DisplayServer.window_get_size()
-
-	# prepare gunshot sound
-	gunshot_sound = preload("res://assets/sounds/shotgun_fire.mp3")
-	shotgun_cock_sound = preload("res://assets/sounds/shotgun_cock.wav")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -28,9 +25,6 @@ func _process(delta: float) -> void:
 	# Sway the camera.
 	fps_rig.position.x = lerp(fps_rig.position.x, 0.0, delta*5)
 	fps_rig.position.y = lerp(fps_rig.position.y, 0.0, delta*5)
-
-	if Input.is_action_just_pressed("primary_attack"):
-		fire()
 
 func sway(sway_amount):
 	fps_rig.position.x += sway_amount.x*0.000015
@@ -63,9 +57,3 @@ func fire():
 	animation_player.play("fire")
 
 	play_sound(gunshot_sound)
-
-	await get_tree().create_timer(0.5).timeout
-	play_sound(shotgun_cock_sound)
-
-
-

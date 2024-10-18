@@ -6,6 +6,12 @@ extends Node
 
 @export var level_container: Node3D = null
 
+func get_level(level_name: String) -> LevelInstance:
+	for level in levels:
+		if level.level_name == level_name:
+			return level
+	return null
+
 @rpc("authority", "call_local")
 func change_level(level_name: String) -> void:
 	# first remove the current level
@@ -14,5 +20,5 @@ func change_level(level_name: String) -> void:
 
 
 	# then add the new level
-	var level_instance = levels[levels.find(func (x): x.level_name == level_name)].scene.instantiate()
+	var level_instance = get_level(level_name).scene.instantiate()
 	level_container.add_child(level_instance)

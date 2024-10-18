@@ -31,6 +31,8 @@ func _on_join_button_pressed() -> void:
 	multiplayer.multiplayer_peer = peer
 	$Control.queue_free()
 
+	get_window().title = "Client"
+
 func _on_host_button_pressed() -> void:
 	# Create server.
 	var peer = ENetMultiplayerPeer.new()
@@ -41,6 +43,8 @@ func _on_host_button_pressed() -> void:
 	match_manager.s_start(
 		map_selector.get_item_text(map_selector.selected)
 	)
+
+	get_window().title = "Server"
 
 	var server_is_player = true
 	if server_is_player:

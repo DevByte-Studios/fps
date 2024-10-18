@@ -29,7 +29,8 @@ func _ready():
 		$head/SubViewportContainer/SubViewport.size = DisplayServer.window_get_size()
 	else:
 		$HUD.queue_free()
-		$head.queue_free()
+		$head/Camera3D.queue_free()
+		$head/SubViewportContainer.queue_free()
 		$WeaponManager.queue_free()
 
 var step_sound_build_up = 0
@@ -41,8 +42,17 @@ var jump_cayote_window = 0
 var is_in_air = false
 var highest_air_point = 0
 
+
+@export var is_crouching = false
+func update_animations():
+	$AnimationTree.set("parameters/crouch_transition/transition_request", "crouching" if is_crouching else "standing")
+	# $AnimationPlayer.current_animation = ("crouched" if is_crouching else "RESET")
+
+	print("[" + str(multiplayer.get_unique_id()) + "] player " + str(peer_id) + " is crouching: " + str(is_crouching))
+
 func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority():
+		update_animations()
 		return
 
 	$head/SubViewportContainer/SubViewport/view_model_camera.global_transform = camera.global_transform # remove after pull
@@ -84,10 +94,10 @@ func _physics_process(delta: float) -> void:
 	var is_walking = Input.is_action_pressed("walk")
 	var SPEED = 2.3 if is_walking else 5.0
 
-	var is_crouching = Input.is_action_pressed("crouch")
-	$AnimationTree.set("parameters/crouch_transition/transition_request", "crouched" if is_crouching else "standing")
-	if is_crouching:
+	var tries_crouching = Input.is_action_pressed("crouch")
+	if tries_crouching:
 		SPEED = 1.5
+	is_crouching = tries_crouching
 
 
 	if last_motion_can_produce_step and is_on_floor():
@@ -108,6 +118,7 @@ func _physics_process(delta: float) -> void:
 	velocity.z = lerp(velocity.z, direction.z * SPEED, lerper)
 
 	move_and_slide()
+	update_animations()
 
 
 const MOUSE_SENSITIVITY = 0.0008;

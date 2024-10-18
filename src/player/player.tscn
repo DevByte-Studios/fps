@@ -13,17 +13,20 @@
 [ext_resource type="AudioStream" uid="uid://dfdystc2n7jj2" path="res://assets/sounds/movement/step.wav" id="11_ufxaa"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0obu1"]
+resource_local_to_scene = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gnoh6"]
+resource_local_to_scene = true
 albedo_color = Color(0, 0.572156, 0.893107, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_beto0"]
+resource_local_to_scene = true
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ngjyo"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
-properties/1/path = NodePath("AnimationTree:parameters/crouch_transition/current_state")
+properties/1/path = NodePath(".:is_crouching")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
@@ -52,57 +55,6 @@ audio_stream = ExtResource("10_rkopp")
 script = ExtResource("9_odcss")
 name = "step"
 audio_stream = ExtResource("11_ufxaa")
-
-[sub_resource type="Animation" id="Animation_fxl5c"]
-resource_name = "crouched"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("head:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, -0.238062, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PhysicsCollider:shape:height")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.6]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PhysicsCollider/MeshInstance3D:mesh:height")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.6]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("BulletHitbox/CollisionShape3D:shape:height")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.6]
-}
 
 [sub_resource type="Animation" id="Animation_il40y"]
 length = 0.001
@@ -155,39 +107,92 @@ tracks/3/keys = {
 "values": [2.0]
 }
 
+[sub_resource type="Animation" id="Animation_fxl5c"]
+resource_local_to_scene = true
+resource_name = "crouched"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.238062, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PhysicsCollider:shape:height")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.6]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PhysicsCollider/MeshInstance3D:mesh:height")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.6]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BulletHitbox/CollisionShape3D:shape:height")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.6]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0ot8i"]
+resource_local_to_scene = true
 _data = {
 "RESET": SubResource("Animation_il40y"),
 "crouched": SubResource("Animation_fxl5c")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sapdn"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kdtw8"]
 animation = &"crouched"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ha17o"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_fsdtl"]
 animation = &"RESET"
 
-[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_2ueoj"]
-xfade_time = 0.1
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_a7htt"]
+xfade_time = 0.2
 input_0/name = "standing"
 input_0/auto_advance = false
 input_0/break_loop_at_end = false
 input_0/reset = true
-input_1/name = "crouched"
+input_1/name = "crouching"
 input_1/auto_advance = false
 input_1/break_loop_at_end = false
 input_1/reset = true
 
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_lcbfn"]
-graph_offset = Vector2(-922.883, 20.8438)
-nodes/Crouched/node = SubResource("AnimationNodeAnimation_sapdn")
-nodes/Crouched/position = Vector2(-120, 260)
-nodes/RESET/node = SubResource("AnimationNodeAnimation_ha17o")
-nodes/RESET/position = Vector2(-120, 80)
-nodes/crouch_transition/node = SubResource("AnimationNodeTransition_2ueoj")
-nodes/crouch_transition/position = Vector2(160, 120)
-nodes/output/position = Vector2(380, 180)
-node_connections = [&"crouch_transition", 0, &"RESET", &"crouch_transition", 1, &"Crouched", &"output", 0, &"crouch_transition"]
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_23ddc"]
+graph_offset = Vector2(173.686, 5.65036)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_fsdtl")
+nodes/Animation/position = Vector2(260, 120)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_kdtw8")
+"nodes/Animation 2/position" = Vector2(280, 280)
+nodes/crouch_transition/node = SubResource("AnimationNodeTransition_a7htt")
+nodes/crouch_transition/position = Vector2(540, 140)
+nodes/output/position = Vector2(800, 220)
+node_connections = [&"crouch_transition", 0, &"Animation", &"crouch_transition", 1, &"Animation 2", &"output", 0, &"crouch_transition"]
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_4mqlm")
@@ -299,9 +304,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.413464, 0)
 libraries = {
 "": SubResource("AnimationLibrary_0ot8i")
 }
+playback_default_blend_time = 0.2
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeBlendTree_lcbfn")
+tree_root = SubResource("AnimationNodeBlendTree_23ddc")
 anim_player = NodePath("../AnimationPlayer")
 parameters/crouch_transition/current_state = "standing"
 parameters/crouch_transition/transition_request = ""

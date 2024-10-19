@@ -21,7 +21,7 @@ func find_audio_stream(stream_name: String) -> AudioStream:
 	push_error("Error: Audio stream not found")
 	return null
 
-@rpc("authority", "call_local")
+@rpc("any_peer", "call_local")
 func _play_sound(stream_name: String, volume_linear = 1.0, pitch = 1.0) -> void:
 	var audioPlayer = AudioStreamPlayer3D.new()
 	audio_stream_parent.add_child(audioPlayer)

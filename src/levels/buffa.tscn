@@ -102,7 +102,7 @@ use_collision = true
 collision_layer = 3
 size = Vector3(57.1924, 5.26441, 65.4187)
 
-[node name="CSGBox3D22" type="CSGBox3D" parent="Level"]
+[node name="Roof" type="CSGBox3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.53641, 7.66021, 2.8797)
 material_override = ExtResource("2_cl73g")
 use_collision = true

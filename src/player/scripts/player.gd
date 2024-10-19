@@ -143,8 +143,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera.rotation.x = clamp(camera.rotation.x - event.relative.y * MOUSE_SENSITIVITY, -1.5, 1.5)
 
 
+@export var death_screen: PackedScene
 func on_died():
 	peer_on_died.rpc()
+	var death_screen_instance: Node3D = death_screen.instantiate()
+	get_tree().root.add_child(death_screen_instance)
+	death_screen_instance.global_transform.origin = camera.global_transform.origin
+	death_screen_instance.look_at(camera.global_transform.origin - camera.global_transform.basis.z, Vector3.UP)
+
 
 @onready var match_manager = get_tree().root.get_node("MultiplayerRoom").get_node("Match") as Match
 

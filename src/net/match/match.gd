@@ -45,14 +45,11 @@ func find_spawn_point(peer_id: int) -> Vector3:
 func s_player_died(peer_id: int) -> void:
 	var timer = Timer.new()
 	add_child(timer)
-	timer.one_shot = true
-	timer.wait_time = 1
-	timer.start()
-	print("started respawn timer")
-	timer.connect("timeout", func ():
-		print("respawning player")
-		player_mangaer.s_spawn_player(peer_id, find_spawn_point(peer_id))
-	)
+
+	await get_tree().create_timer(3.0).timeout
+	print("respawning player")
+	player_mangaer.s_spawn_player(peer_id, find_spawn_point(peer_id))
+	
 
 func s_start(map: String = "buffa") -> void:
 	running = true

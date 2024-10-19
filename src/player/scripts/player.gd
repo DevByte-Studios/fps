@@ -15,6 +15,8 @@ const GRAVITY = -25
 
 @onready var standup_raycast = $CanStandUp
 
+@onready var visual_character = $Character as VisualCharacter
+
 @rpc("authority", "call_local")
 func c_spawn_at(spawn_location: Vector3) -> void:
 	global_transform.origin = spawn_location
@@ -27,6 +29,7 @@ func _ready():
 		$head/Camera3D.current = true
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		$head/SubViewportContainer/SubViewport.size = DisplayServer.window_get_size()
+		$Character.visible = false
 	else:
 		$HUD.queue_free()
 		$head/Camera3D.queue_free()
@@ -35,6 +38,8 @@ func _ready():
 
 var step_sound_build_up = 0
 const STEP_SOUND_INTERVAL = 0.03
+
+var last_delta = 0.0
 
 var last_motion_can_produce_step = false
 
@@ -46,9 +51,6 @@ var highest_air_point = 0
 @export var is_crouching = false
 func update_animations():
 	$AnimationTree.set("parameters/crouch_transition/transition_request", "crouching" if is_crouching else "standing")
-	# $AnimationPlayer.current_animation = ("crouched" if is_crouching else "RESET")
-
-	print("[" + str(multiplayer.get_unique_id()) + "] player " + str(peer_id) + " is crouching: " + str(is_crouching))
 
 func _physics_process(delta: float) -> void:
 	if not is_multiplayer_authority():
@@ -78,6 +80,8 @@ func _physics_process(delta: float) -> void:
 		if not is_in_air:
 			is_in_air = true
 
+	visual_character.is_falling = not is_on_floor()
+
 	var can_jump = jump_cayote_window > 0
 
 	# Handle jump.
@@ -98,12 +102,16 @@ func _physics_process(delta: float) -> void:
 	if tries_crouching:
 		SPEED = 1.5
 	is_crouching = tries_crouching
+	visual_character.is_crouching = is_crouching
 
+
+	var last_frame_hor_mov = get_position_delta()
+	last_frame_hor_mov.y = 0
+
+	visual_character.horizontal_speed = last_frame_hor_mov.length() / last_delta
 
 	if last_motion_can_produce_step and is_on_floor():
-		var mov_delta = get_position_delta()
-		mov_delta.y = 0
-		step_sound_build_up += mov_delta.length() * delta
+		step_sound_build_up += last_frame_hor_mov.length() * delta
 		if step_sound_build_up > STEP_SOUND_INTERVAL:
 			sound_source.play_sound("step", 1, randf_range(0.8, 1.2))
 			print("step")
@@ -119,6 +127,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 	update_animations()
+	last_delta = delta
 
 
 const MOUSE_SENSITIVITY = 0.0008;

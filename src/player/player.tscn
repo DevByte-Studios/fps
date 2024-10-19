@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cpw1sr25ca3m4"]
+[gd_scene load_steps=29 format=3 uid="uid://cpw1sr25ca3m4"]
 
 [ext_resource type="Script" path="res://src/player/scripts/player.gd" id="1_4mqlm"]
 [ext_resource type="PackedScene" uid="uid://bmiw620bm21kw" path="res://src/player/view_model_camera.tscn" id="2_fgaq1"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://src/components/network_sound_source/playable_sound.gd" id="9_odcss"]
 [ext_resource type="AudioStream" uid="uid://citpb065apa" path="res://assets/sounds/movement/jumpland.wav" id="10_rkopp"]
 [ext_resource type="AudioStream" uid="uid://dfdystc2n7jj2" path="res://assets/sounds/movement/step.wav" id="11_ufxaa"]
+[ext_resource type="PackedScene" uid="uid://bwtudpfak386i" path="res://src/player/characters/character.tscn" id="12_dn87q"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0obu1"]
 resource_local_to_scene = true
@@ -29,6 +30,9 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath(".:is_crouching")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath(".:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hwxbt"]
 
@@ -202,6 +206,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_0obu1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="PhysicsCollider"]
+visible = false
 material_override = SubResource("StandardMaterial3D_gnoh6")
 mesh = SubResource("CapsuleMesh_beto0")
 
@@ -312,5 +317,8 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/crouch_transition/current_state = "standing"
 parameters/crouch_transition/transition_request = ""
 parameters/crouch_transition/current_index = 0
+
+[node name="Character" parent="." instance=ExtResource("12_dn87q")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 
 [connection signal="on_death" from="HealthComponent" to="." method="on_died"]

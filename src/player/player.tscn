@@ -31,14 +31,12 @@ properties/2/path = NodePath(".:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[sub_resource type="LabelSettings" id="LabelSettings_in7j1"]
-font_size = 60
-
 [sub_resource type="LabelSettings" id="LabelSettings_hicsj"]
 line_spacing = 5.0
-font_size = 35
-shadow_size = 81
-shadow_color = Color(0, 0, 0, 0.243137)
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_in7j1"]
+font_size = 24
 
 [sub_resource type="Resource" id="Resource_i7nmf"]
 script = ExtResource("7_ks5gy")
@@ -231,7 +229,6 @@ render_target_update_mode = 4
 [node name="view_model_camera" parent="head/SubViewportContainer/SubViewport" instance=ExtResource("2_fgaq1")]
 unique_name_in_owner = true
 cull_mask = 1047554
-script = null
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ngjyo")
@@ -239,7 +236,7 @@ replication_config = SubResource("SceneReplicationConfig_ngjyo")
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("label") instance=ExtResource("4_3dxbr")]
 max_health = null
 health = null
-label = NodePath("../HUD/Health")
+label = NodePath("../HUD/CanvasLayer/HealthContainer/MarginContainer/GridContainer/Health")
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
@@ -250,47 +247,61 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Health" type="Label" parent="HUD"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -23.0
-offset_right = 20.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "100"
-label_settings = SubResource("LabelSettings_in7j1")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="HUD"]
 
-[node name="CenterContainer" type="CenterContainer" parent="HUD"]
-layout_mode = 1
+[node name="CenterContainer" type="CenterContainer" parent="HUD/CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Crosshair" parent="HUD/CenterContainer" instance=ExtResource("3_grj5b")]
+[node name="Crosshair" parent="HUD/CanvasLayer/CenterContainer" instance=ExtResource("3_grj5b")]
 layout_mode = 2
 
-[node name="Ammo" type="Label" parent="HUD"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -94.0
-offset_top = -49.0
-grow_horizontal = 0
-grow_vertical = 0
+[node name="AmmoContainer" type="PanelContainer" parent="HUD/CanvasLayer"]
+offset_left = 1760.0
+offset_top = 974.0
+offset_right = 1855.0
+offset_bottom = 1024.0
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/CanvasLayer/AmmoContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="HUD/CanvasLayer/AmmoContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Ammo" type="Label" parent="HUD/CanvasLayer/AmmoContainer/MarginContainer/GridContainer"]
+layout_mode = 2
 text = "10/10"
 label_settings = SubResource("LabelSettings_hicsj")
+
+[node name="HealthContainer" type="PanelContainer" parent="HUD/CanvasLayer"]
+offset_left = 64.0
+offset_top = 984.0
+offset_right = 64.0
+offset_bottom = 1034.0
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/CanvasLayer/HealthContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="HUD/CanvasLayer/HealthContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Health" type="Label" parent="HUD/CanvasLayer/HealthContainer/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "100"
+label_settings = SubResource("LabelSettings_in7j1")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("head", "raycast", "view_model", "cooldown_timer", "sound_source", "ammo_label")]
 script = ExtResource("6_wjwxp")
@@ -299,7 +310,7 @@ raycast = NodePath("../head/Camera3D/RayCast3D")
 view_model = NodePath("../head/SubViewportContainer/SubViewport/view_model_camera")
 cooldown_timer = NodePath("../CooldownTimer")
 sound_source = NodePath("../WeaponSoundSource")
-ammo_label = NodePath("../HUD/Ammo")
+ammo_label = NodePath("../HUD/CanvasLayer/AmmoContainer/MarginContainer/GridContainer/Ammo")
 guns = Array[ExtResource("7_ks5gy")]([SubResource("Resource_i7nmf")])
 
 [node name="MovementSoundSource" type="Node" parent="." node_paths=PackedStringArray("audio_stream_parent")]

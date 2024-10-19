@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bvn84ve4bmtaq"]
+
+[ext_resource type="FontFile" uid="uid://cesfi4l8yerqv" path="res://assets/fonts/Unbounded-VariableFont_wght.ttf" id="1_2uss6"]
+
+[resource]
+Label/font_sizes/font_size = 24
+Label/fonts/font = ExtResource("1_2uss6")

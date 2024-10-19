@@ -8,7 +8,21 @@ extends Resource
 @export var reserve_ammo: int;
 @export var has_crosshair: bool;
 
+@export var fire_rate: float;
+@export var weapon_type: WeaponType;
+
 @export var base_damage: int;
 @export var armor_penetration: int;
+
+@export_group("Audio Streams")
+
+@export var fire_sound: String;
+@export var reload_sound: String;
+
+
+enum WeaponType {
+    AUTOMATIC,
+    SEMI_AUTOMATIC,
+}
 
 

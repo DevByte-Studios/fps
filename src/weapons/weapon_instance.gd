@@ -4,6 +4,7 @@ var weapon_type: WeaponConfig = WeaponConfig.new()
 
 var ammo: int = 0
 var reserve_ammo: int = 0
+var can_fire: bool = false
 
 
 static func _new(type: WeaponConfig) -> WeaponInstance:

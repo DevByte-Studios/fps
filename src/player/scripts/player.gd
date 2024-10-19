@@ -57,8 +57,6 @@ func _physics_process(delta: float) -> void:
 		update_animations()
 		return
 
-	$head/SubViewportContainer/SubViewport/view_model_camera.global_transform = camera.global_transform # remove after pull
-
 	# Add the gravity.
 	var gravity_normal = get_floor_normal() if is_on_floor() else Vector3.UP
 	if not is_on_floor():

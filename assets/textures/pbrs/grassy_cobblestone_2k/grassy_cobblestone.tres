@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://bqx4esspcq3dn"]
+
+[ext_resource type="Texture2D" uid="uid://da61u26pkxgqk" path="res://assets/textures/pbrs/grassy_cobblestone_2k/grassy_cobblestone_diff_2k.jpg" id="1_bf06h"]
+[ext_resource type="Texture2D" uid="uid://cdduj3yd7y6ut" path="res://assets/textures/pbrs/grassy_cobblestone_2k/grassy_cobblestone_nor_gl_2k.jpg" id="2_t1q1q"]
+
+[resource]
+albedo_texture = ExtResource("1_bf06h")
+normal_enabled = true
+normal_texture = ExtResource("2_t1q1q")

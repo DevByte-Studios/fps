@@ -1,0 +1,22 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://b2q5jbbp15p5b"]
+
+[ext_resource type="Texture2D" uid="uid://iaky35g4gt1q" path="res://assets/textures/pbrs/worn_planks_2k/worn_planks_diff_2k.jpg" id="1_isipb"]
+[ext_resource type="Texture2D" uid="uid://18x48lscm0t8" path="res://assets/textures/pbrs/worn_planks_2k/worn_planks_arm_2k.jpg" id="2_4fjqu"]
+[ext_resource type="Texture2D" uid="uid://bcbowcictsi3r" path="res://assets/textures/pbrs/worn_planks_2k/worn_planks_disp_2k.jpg" id="3_lc0cb"]
+[ext_resource type="Texture2D" uid="uid://bt863flnwlnhk" path="res://assets/textures/pbrs/worn_planks_2k/worn_planks_nor_gl_2k.jpg" id="4_g66u8"]
+
+[resource]
+albedo_texture = ExtResource("1_isipb")
+metallic_texture = ExtResource("2_4fjqu")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_4fjqu")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("4_g66u8")
+ao_enabled = true
+ao_texture = ExtResource("2_4fjqu")
+heightmap_enabled = true
+heightmap_texture = ExtResource("3_lc0cb")
+uv1_scale = Vector3(0.395, 0.395, 0.395)
+uv1_triplanar = true
+uv1_world_triplanar = true

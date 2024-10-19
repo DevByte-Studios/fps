@@ -1,0 +1,22 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://bmr4jrbn834tm"]
+
+[ext_resource type="Texture2D" uid="uid://dqon8j7eds1ec" path="res://assets/textures/pbrs/leafy_grass/leafy_grass_diff_2k.jpg" id="1_lqa1o"]
+[ext_resource type="Texture2D" uid="uid://dd322rhlnmdaw" path="res://assets/textures/pbrs/leafy_grass/leafy_grass_disp_2k.jpg" id="3_dpwww"]
+[ext_resource type="Texture2D" uid="uid://ge11ja3ro2uj" path="res://assets/textures/pbrs/leafy_grass/leafy_grass_arm_2k.jpg" id="4_yr6gs"]
+[ext_resource type="Texture2D" uid="uid://c52w7u13xaq60" path="res://assets/textures/pbrs/leafy_grass/leafy_grass_nor_gl_2k.jpg" id="5_4mf4m"]
+
+[resource]
+albedo_texture = ExtResource("1_lqa1o")
+metallic_texture = ExtResource("4_yr6gs")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("4_yr6gs")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("5_4mf4m")
+ao_enabled = true
+ao_texture = ExtResource("4_yr6gs")
+heightmap_enabled = true
+heightmap_texture = ExtResource("3_dpwww")
+uv1_scale = Vector3(0.235, 0.235, 0.235)
+uv1_triplanar = true
+uv1_world_triplanar = true

@@ -1,0 +1,22 @@
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://b3tk1p5qb85hr"]
+
+[ext_resource type="Texture2D" uid="uid://bwl8l0vt2ss0x" path="res://assets/textures/pbrs/rock_wall_08_2k/rock_wall_08_diff_2k.jpg" id="1_culdw"]
+[ext_resource type="Texture2D" uid="uid://d0oq4whsgly2o" path="res://assets/textures/pbrs/rock_wall_08_2k/rock_wall_08_arm_2k.jpg" id="2_3bm0o"]
+[ext_resource type="Texture2D" uid="uid://dyfknu1pjqp05" path="res://assets/textures/pbrs/rock_wall_08_2k/rock_wall_08_disp_2k.jpg" id="3_dn7jo"]
+[ext_resource type="Texture2D" uid="uid://dkpdiymb1gql" path="res://assets/textures/pbrs/rock_wall_08_2k/rock_wall_08_nor_gl_2k.jpg" id="3_lcw2o"]
+
+[resource]
+albedo_texture = ExtResource("1_culdw")
+metallic_texture = ExtResource("2_3bm0o")
+metallic_texture_channel = 2
+roughness_texture = ExtResource("2_3bm0o")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3_lcw2o")
+ao_enabled = true
+ao_texture = ExtResource("2_3bm0o")
+heightmap_enabled = true
+heightmap_texture = ExtResource("3_dn7jo")
+uv1_scale = Vector3(0.235, 0.235, 0.235)
+uv1_triplanar = true
+uv1_world_triplanar = true

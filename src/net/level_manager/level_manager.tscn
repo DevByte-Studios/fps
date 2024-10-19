@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://src/net/level_manager/level_manager.gd" id="1_j7cp0"]
 [ext_resource type="Script" path="res://src/net/level_manager/level_instance.gd" id="2_rfjxs"]
-[ext_resource type="PackedScene" uid="uid://cjq7lnebp1hlj" path="res://src/levels/buffa.tscn" id="3_0xhmb"]
+[ext_resource type="PackedScene" uid="uid://dqwiskb5p72b1" path="res://src/levels/buffa/buffa.tscn" id="3_0k78x"]
 [ext_resource type="PackedScene" uid="uid://coj7d24tc5fb4" path="res://src/levels/1v1_me_bro.tscn" id="4_bccfd"]
 
 [sub_resource type="Resource" id="Resource_h15bq"]
 script = ExtResource("2_rfjxs")
-scene = ExtResource("3_0xhmb")
+scene = ExtResource("3_0k78x")
 level_name = "buffa"
 
 [sub_resource type="Resource" id="Resource_djay8"]

@@ -47,6 +47,8 @@ var jump_cayote_window = 0
 var is_in_air = false
 var highest_air_point = 0
 
+var speed_penalty = 0.0
+
 
 @export var is_crouching = false
 func update_animations():
@@ -93,6 +95,10 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
+	speed_penalty = clamp(speed_penalty - delta * 0, 0, 2) # 2
+	if speed_penalty > 0:
+		print("Speed penalty: ", speed_penalty)
+
 	var is_walking = Input.is_action_pressed("walk")
 	var SPEED = 2.3 if is_walking else 5.0
 
@@ -102,6 +108,7 @@ func _physics_process(delta: float) -> void:
 	is_crouching = tries_crouching
 	visual_character.is_crouching = is_crouching
 
+	SPEED /= speed_penalty + 1
 
 	var last_frame_hor_mov = get_position_delta()
 	last_frame_hor_mov.y = 0
@@ -150,3 +157,8 @@ func peer_on_died():
 	queue_free()
 	if multiplayer.is_server():
 		match_manager.s_player_died(peer_id)
+
+
+func _on_health_component_on_damage(amount: int, slowdown_multiplier) -> void:
+	print("I took damage")
+	speed_penalty += amount * 0.1 * slowdown_multiplier

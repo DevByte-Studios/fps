@@ -1540,6 +1540,7 @@ external_skeleton = NodePath("../../T-Pose/GeneralSkeleton")
 
 [node name="BulletHitbox" parent="Colliders/LeftUpperLeg" instance=ExtResource("2_2yg1h")]
 damage_multiplier = 0.75
+slowdown_multiplier = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Colliders/LeftUpperLeg/BulletHitbox"]
 transform = Transform3D(0.999966, 0.000530099, -0.00825166, 0.000536953, 0.991674, 0.128774, 0.00825122, -0.128774, 0.99164, -0.000507813, 0.00740057, -0.000228887)
@@ -1554,6 +1555,7 @@ external_skeleton = NodePath("../../T-Pose/GeneralSkeleton")
 
 [node name="BulletHitbox" parent="Colliders/LeftLowerLeg" instance=ExtResource("2_2yg1h")]
 damage_multiplier = 0.75
+slowdown_multiplier = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Colliders/LeftLowerLeg/BulletHitbox"]
 transform = Transform3D(0.997371, 0.0650963, 0.0318409, -0.0685875, 0.989806, 0.124829, -0.0233904, -0.126685, 0.991668, 0.00100091, 0.00731917, 0.000915758)
@@ -1568,6 +1570,7 @@ external_skeleton = NodePath("../../T-Pose/GeneralSkeleton")
 
 [node name="BulletHitbox" parent="Colliders/RightLowerLeg" instance=ExtResource("2_2yg1h")]
 damage_multiplier = 0.75
+slowdown_multiplier = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Colliders/RightLowerLeg/BulletHitbox"]
 transform = Transform3D(0.998373, -0.0511608, 0.0252095, 0.0475058, 0.990529, 0.12883, -0.0315617, -0.127423, 0.991347, -0.00112002, 0.00732405, 0.00082942)
@@ -1582,6 +1585,7 @@ external_skeleton = NodePath("../../T-Pose/GeneralSkeleton")
 
 [node name="BulletHitbox" parent="Colliders/RightUpperLeg" instance=ExtResource("2_2yg1h")]
 damage_multiplier = 0.75
+slowdown_multiplier = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Colliders/RightUpperLeg/BulletHitbox"]
 transform = Transform3D(0.996376, 0.0844142, 0.010467, -0.0850592, 0.988045, 0.128572, 0.00051146, -0.128996, 0.991645, 0.000518012, 0.00740223, -4.01968e-05)
@@ -1596,6 +1600,7 @@ external_skeleton = NodePath("../../T-Pose/GeneralSkeleton")
 
 [node name="BulletHitbox" parent="Colliders/RightFoot" instance=ExtResource("2_2yg1h")]
 damage_multiplier = 0.75
+slowdown_multiplier = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Colliders/RightFoot/BulletHitbox"]
 transform = Transform3D(0.996376, 0.0844142, 0.0104669, -0.0846493, 0.996109, 0.0245264, -0.00835586, -0.0253233, 0.999644, -3.64096e-05, 0.0023822, -0.00172231)
@@ -1610,6 +1615,7 @@ external_skeleton = NodePath("../../T-Pose/GeneralSkeleton")
 
 [node name="BulletHitbox" parent="Colliders/LeftFoot" instance=ExtResource("2_2yg1h")]
 damage_multiplier = 0.75
+slowdown_multiplier = 2.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Colliders/LeftFoot/BulletHitbox"]
 transform = Transform3D(0.996376, 0.0844142, 0.0104669, -0.0846493, 0.996109, 0.0245264, -0.00835586, -0.0253233, 0.999644, -3.64096e-05, 0.0023822, -0.00172231)

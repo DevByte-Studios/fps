@@ -9,9 +9,10 @@ func _on_bullet_hit(damage: int) -> void:
 
 @export var damage_multiplier: float = 1.0
 @export var is_headshot: bool = false
+@export var slowdown_multiplier: float = 1.0
 
 @rpc("any_peer", "call_local")
 func _on_bullet_hit_rpc(damage: int) -> void:
 	if is_multiplayer_authority():
-		health_component._on_damage(damage)
+		health_component._on_damage(damage, slowdown_multiplier)
 	

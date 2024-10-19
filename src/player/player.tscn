@@ -41,7 +41,7 @@ reserve_ammo = 8
 has_crosshair = true
 fire_rate = 1.0
 weapon_type = 1
-base_damage = 100
+base_damage = 10
 armor_penetration = 0
 fire_sound = "shotgun_fire"
 reload_sound = "res://assets/sounds/shotgun_cock.wav"
@@ -215,6 +215,8 @@ cull_mask = 1047554
 replication_config = SubResource("SceneReplicationConfig_ngjyo")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("label") instance=ExtResource("4_3dxbr")]
+max_health = null
+health = null
 label = NodePath("../HUD/Health")
 
 [node name="HUD" type="Control" parent="."]
@@ -299,4 +301,5 @@ audio_streams = Array[ExtResource("9_odcss")]([SubResource("Resource_xgssi")])
 [node name="WeaponSoundLocation" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22408, 0)
 
+[connection signal="on_damage" from="HealthComponent" to="." method="_on_health_component_on_damage"]
 [connection signal="on_death" from="HealthComponent" to="." method="on_died"]

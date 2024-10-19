@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=4 uid="uid://bmiw620bm21kw"]
+[gd_scene load_steps=73 format=4 uid="uid://bmiw620bm21kw"]
 
 [ext_resource type="Material" uid="uid://csu0p2hwvltmv" path="res://resources/materials/shotgun_material.tres" id="1_2rhdw"]
 [ext_resource type="Script" path="res://src/player/scripts/weapon_manager/weapon_manager.gd" id="1_bux0y"]
@@ -806,6 +806,30 @@ tracks/3/keys = {
 "update": 0,
 "values": [Vector3(0.172075, -0.186109, -0.731812)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("left_hand:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.0139438, -0.114945, 2.35733)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("shotgun_model/Forend_lowpoly:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_r5he0"]
 resource_name = "equip"
@@ -887,11 +911,88 @@ tracks/3/keys = {
 "values": [Vector3(0.172075, -0.186109, -0.731812), Vector3(0.172075, -0.186109, -0.662977), Vector3(0.172075, -0.186109, -0.731812)]
 }
 
+[sub_resource type="Animation" id="Animation_ggpir"]
+resource_name = "reload"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.6, 0.9, 1, 1.1, 1.3, 1.4, 1.5, 1.9, 2, 2.1, 2.4, 2.5, 2.6, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.031645, -0.0167032, 0.0757019), Vector3(0.031645, -0.0972532, 0.144473), Vector3(0.031645, -0.0972532, 0.144473), Vector3(0.031645, -0.0972532, 0.144473), Vector3(0.031645, -0.0972532, 0.144473), Vector3(0.031645, -0.0972532, 0.144473), Vector3(0.031645, -0.0972532, 0.144473), Vector3(0.031645, -0.0972532, 0.144473), Vector3(0.031645, -0.0972532, 0.144473), Vector3(0.031645, -0.0972532, 0.144473), Vector3(0.031645, -0.0972532, 0.144473), Vector3(0.031645, -0.0972532, 0.144473), Vector3(0.031645, -0.0972532, 0.144473), Vector3(0.031645, -0.0972532, 0.144473), Vector3(0.031645, -0.0972532, 0.144473), Vector3(0.031645, -0.0972532, 0.144473), Vector3(0.031645, -0.0167032, 0.0757019)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.6, 0.9, 1, 1.1, 1.3, 1.4, 1.5, 1.9, 2, 2.1, 2.4, 2.5, 2.6, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.29695, 0, 0), Vector3(0.29695, 0, 0), Vector3(0.29695, 0, 0), Vector3(0.29695, 0, 0), Vector3(0.29695, 0, 0), Vector3(0.29695, 0, 0), Vector3(0.29695, 0, 0), Vector3(0.29695, 0, 0), Vector3(0.29695, 0, 0), Vector3(0.29695, 0, 0), Vector3(0.29695, 0, 0), Vector3(0.29695, 0, 0), Vector3(0.29695, 0, 0), Vector3(0.29695, 0, 0), Vector3(0.29695, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("left_hand:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.6, 0.9, 1, 1.1, 1.3, 1.4, 1.5, 1.9, 2, 2.1, 2.4, 2.5, 2.6, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.172075, -0.186109, -0.731812), Vector3(0.172075, -0.186109, -0.731812), Vector3(0.172075, -0.19193, -0.650237), Vector3(0.172075, -0.186109, -0.731812), Vector3(0.172075, -0.186109, -0.731812), Vector3(0.172075, -0.19193, -0.650237), Vector3(0.172075, -0.186109, -0.731812), Vector3(0.172075, -0.186109, -0.731812), Vector3(0.172075, -0.19193, -0.650237), Vector3(0.172075, -0.186109, -0.731812), Vector3(0.172075, -0.186109, -0.731812), Vector3(0.172075, -0.19193, -0.650237), Vector3(0.172075, -0.186109, -0.731812), Vector3(0.172075, -0.186109, -0.731812), Vector3(0.172075, -0.19193, -0.650237), Vector3(0.172075, -0.186109, -0.731812), Vector3(0.172075, -0.186109, -0.731812)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("left_hand:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.6, 0.9, 1, 1.1, 1.3, 1.4, 1.5, 1.9, 2, 2.1, 2.4, 2.5, 2.6, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.0139438, -0.114945, 2.35733), Vector3(0.0139438, -0.114945, 2.35733), Vector3(0.0139438, -0.114945, 2.35733), Vector3(0.0139438, -0.114945, 2.35733), Vector3(0.0139438, -0.114945, 2.35733), Vector3(0.0139438, -0.114945, 2.35733), Vector3(0.0139438, -0.114945, 2.35733), Vector3(0.0139438, -0.114945, 2.35733), Vector3(0.0139438, -0.114945, 2.35733), Vector3(0.0139438, -0.114945, 2.35733), Vector3(0.0139438, -0.114945, 2.35733), Vector3(0.0139438, -0.114945, 2.35733), Vector3(0.0139438, -0.114945, 2.35733), Vector3(0.0139438, -0.114945, 2.35733), Vector3(0.0139438, -0.114945, 2.35733), Vector3(0.0139438, -0.114945, 2.35733), Vector3(0.0139438, -0.114945, 2.35733)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("shotgun_model/Forend_lowpoly:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.6, 0.9, 1, 1.1, 1.3, 1.4, 1.5, 1.9, 2, 2.1, 2.4, 2.5, 2.6, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.103287, 0.00598297, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.103287, 0.00598297, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.103287, 0.00598297, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.103287, 0.00598297, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(-0.103287, 0.00598297, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("shotgun_model/Forend_lowpoly:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 0.6, 0.9, 1, 1.1, 1.3, 1.4, 1.5, 1.9, 2, 2.1, 2.4, 2.5, 2.6, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(3.55271e-15, 1.42109e-14, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(3.55271e-15, 1.42109e-14, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(3.55271e-15, 1.42109e-14, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(3.55271e-15, 1.42109e-14, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(3.55271e-15, 1.42109e-14, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i01q0"]
 _data = {
 "RESET": SubResource("Animation_vi2c1"),
 "equip": SubResource("Animation_r5he0"),
-"fire": SubResource("Animation_f3r2h")
+"fire": SubResource("Animation_f3r2h"),
+"reload": SubResource("Animation_ggpir")
 }
 
 [node name="view_model_camera" type="Camera3D"]
@@ -904,7 +1005,7 @@ script = ExtResource("1_bux0y")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.031645, -0.0167032, 0.0757019)
 
 [node name="shotgun_model" type="Node3D" parent="fps_rig/shotgun"]
-transform = Transform3D(2.98023e-08, 0, 1, 0, 1, 0, -1, 0, 2.98023e-08, 0.137136, -0.282659, -0.60417)
+transform = Transform3D(7.54979e-08, 0, 1, 0, 1, 0, -1, 0, 7.54979e-08, 0.137136, -0.282659, -0.60417)
 
 [node name="Body_lowpoly" type="MeshInstance3D" parent="fps_rig/shotgun/shotgun_model"]
 layers = 2
@@ -943,7 +1044,7 @@ mesh = SubResource("ArrayMesh_bbihh")
 skeleton = NodePath("")
 
 [node name="left_hand" type="Node3D" parent="fps_rig/shotgun"]
-transform = Transform3D(-0.0493744, -0.0491041, -0.00803888, 0.0495054, -0.0496179, -0.000977395, -0.00500556, -0.00636578, 0.0696282, 0.172075, -0.186109, -0.731812)
+transform = Transform3D(-0.0493745, -0.0491041, -0.00803885, 0.0495053, -0.049618, -0.000977394, -0.00500555, -0.00636577, 0.0696282, 0.172075, -0.186109, -0.731812)
 
 [node name="hand" type="MeshInstance3D" parent="fps_rig/shotgun/left_hand"]
 transform = Transform3D(0.911195, -0.245408, -0.0361355, 0.245713, 0.911822, 0.00343933, 0.0339967, -0.0127208, 0.943658, 0.110146, -0.260395, 1.04671)

@@ -7,11 +7,21 @@ extends Node
 @export var cooldown_timer: Timer;
 @export var sound_source: NetworkSoundSource;
 
+@export var ammo_label: Label;
+
 @export var guns: Array[WeaponConfig] = [];
 
 var selected_weapon: String = "primary"
 
 var weapons = {}
+
+func _process(_delta: float) -> void:
+	# Update ammo label
+	var current_weapon = get_current_weapon()
+	if current_weapon:
+		ammo_label.text = str(current_weapon.ammo) + "/" + str(current_weapon.weapon_type.magazine_size)
+	else:
+		ammo_label.text = "0/0"
 
 func _ready() -> void:
 	# Add head to raycast exceptions
@@ -81,7 +91,7 @@ func attack() -> void:
 		current_weapon.ammo -= 1
 
 		get_current_weapon_animation().play("fire")
-		sound_source.play_sound(current_weapon.weapon_type.fire_sound)
+		sound_source.play_sound(current_weapon.weapon_type.fire_sound, 0.5)
 
 		if raycast.is_colliding():
 			var collider = raycast.get_collider()
@@ -105,6 +115,14 @@ func reload():
 		return
 
 	if current_weapon.ammo < current_weapon.weapon_type.magazine_size:
+		current_weapon.can_fire = false
+
+		get_current_weapon_animation().play("reload")
+
+		sound_source.play_sound(current_weapon.weapon_type.reload_sound, 0.5)
+		
+		cooldown_timer.start(current_weapon.weapon_type.reload_time)
+
 		current_weapon.ammo = current_weapon.weapon_type.magazine_size
 	else:
 		print("Error: Weapon is already full")
@@ -120,5 +138,7 @@ func _input(event: InputEvent) -> void:
 		set_current_weapon("knife")
 	elif event.is_action_pressed("primary_attack"):
 		attack()
+	elif event.is_action_pressed("reload"):
+		reload()
 
 	

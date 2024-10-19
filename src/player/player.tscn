@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cpw1sr25ca3m4"]
+[gd_scene load_steps=30 format=3 uid="uid://cpw1sr25ca3m4"]
 
 [ext_resource type="Script" path="res://src/player/scripts/player.gd" id="1_4mqlm"]
 [ext_resource type="PackedScene" uid="uid://bmiw620bm21kw" path="res://src/player/view_model_camera.tscn" id="2_fgaq1"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://citpb065apa" path="res://assets/sounds/movement/jumpland.wav" id="10_rkopp"]
 [ext_resource type="AudioStream" uid="uid://dfdystc2n7jj2" path="res://assets/sounds/movement/step.wav" id="11_ufxaa"]
 [ext_resource type="PackedScene" uid="uid://bwtudpfak386i" path="res://src/player/characters/character.tscn" id="12_dn87q"]
+[ext_resource type="AudioStream" uid="uid://bojkkwa5m44t0" path="res://assets/sounds/shotgun_cock.wav" id="13_iysbl"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0obu1"]
 resource_local_to_scene = true
@@ -31,6 +32,10 @@ properties/2/replication_mode = 1
 [sub_resource type="LabelSettings" id="LabelSettings_in7j1"]
 font_size = 60
 
+[sub_resource type="LabelSettings" id="LabelSettings_hicsj"]
+line_spacing = 5.0
+font_size = 35
+
 [sub_resource type="Resource" id="Resource_i7nmf"]
 script = ExtResource("7_ks5gy")
 display_name = "Shotgun"
@@ -38,13 +43,14 @@ model_name = "shotgun"
 view_model_name = "shotgun"
 magazine_size = 8
 reserve_ammo = 8
-has_crosshair = true
 fire_rate = 1.0
 weapon_type = 1
-base_damage = 100
+reload_time = 3.0
+has_crosshair = true
+base_damage = 8
 armor_penetration = 0
 fire_sound = "shotgun_fire"
-reload_sound = "res://assets/sounds/shotgun_cock.wav"
+reload_sound = "shotgun_cock"
 
 [sub_resource type="Resource" id="Resource_6ka6j"]
 script = ExtResource("9_odcss")
@@ -175,6 +181,11 @@ script = ExtResource("9_odcss")
 name = "shotgun_fire"
 audio_stream = ExtResource("8_n54sh")
 
+[sub_resource type="Resource" id="Resource_w5fjy"]
+script = ExtResource("9_odcss")
+name = "shotgun_cock"
+audio_stream = ExtResource("13_iysbl")
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_4mqlm")
 
@@ -254,13 +265,28 @@ grow_vertical = 2
 [node name="Crosshair" parent="HUD/CenterContainer" instance=ExtResource("3_grj5b")]
 layout_mode = 2
 
-[node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("head", "raycast", "view_model", "cooldown_timer", "sound_source")]
+[node name="Ammo" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -94.0
+offset_top = -49.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "10/10"
+label_settings = SubResource("LabelSettings_hicsj")
+
+[node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("head", "raycast", "view_model", "cooldown_timer", "sound_source", "ammo_label")]
 script = ExtResource("6_wjwxp")
 head = NodePath("../head")
 raycast = NodePath("../head/Camera3D/RayCast3D")
 view_model = NodePath("../head/SubViewportContainer/SubViewport/view_model_camera")
 cooldown_timer = NodePath("../CooldownTimer")
 sound_source = NodePath("../WeaponSoundSource")
+ammo_label = NodePath("../HUD/Ammo")
 guns = Array[ExtResource("7_ks5gy")]([SubResource("Resource_i7nmf")])
 
 [node name="NetworkSoundSource" type="Node" parent="." node_paths=PackedStringArray("audio_stream_parent")]
@@ -294,7 +320,7 @@ raycasts_to_disable = [NodePath("../head/Camera3D/RayCast3D")]
 [node name="WeaponSoundSource" type="Node" parent="." node_paths=PackedStringArray("audio_stream_parent")]
 script = ExtResource("8_ewumb")
 audio_stream_parent = NodePath("../WeaponSoundLocation")
-audio_streams = Array[ExtResource("9_odcss")]([SubResource("Resource_xgssi")])
+audio_streams = Array[ExtResource("9_odcss")]([SubResource("Resource_xgssi"), SubResource("Resource_w5fjy")])
 
 [node name="WeaponSoundLocation" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22408, 0)

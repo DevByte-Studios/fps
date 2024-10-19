@@ -8,6 +8,25 @@ extends Node3D
 
 @export var raycasts_to_disable: Array[RayCast3D] = []
 
+@export var physical_bones_controller: PhysicalBoneSimulator3D
+
+@export var remove_on_ragdoll: Array[Node] = []
+
+var is_ragdolled = false
+
+func ragdoll():
+	is_ragdolled = true
+	for node in remove_on_ragdoll:
+		node.queue_free()
+	physical_bones_controller.active = true
+	physical_bones_controller.physical_bones_start_simulation()
+
+	await get_tree().create_timer(3.0).timeout
+	physical_bones_controller.active = false
+	add_to_group("ragdoll")
+	add_to_group("remove_on_reset")
+
+
 func _ready():
 	for hitbox in hitboxes:
 		hitbox.health_component = player_health_component
@@ -24,6 +43,8 @@ func _ready():
 var current_falling_strength = 0.0
 
 func _process(delta: float) -> void:
+	if is_ragdolled:
+		return
 	anim_tree.set("parameters/Walking_speed/scale", horizontal_speed / 3)
 	anim_tree.set("parameters/Crouching_speed/scale", horizontal_speed / 3)
 	var is_walking = horizontal_speed > 0.1

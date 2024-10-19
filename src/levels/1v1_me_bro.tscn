@@ -31,6 +31,7 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.35991, 0)
 material_override = ExtResource("1_grfln")
 use_collision = true
+collision_layer = 3
 size = Vector3(20.345, 9.73, 20.915)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="Level/CSGBox3D"]

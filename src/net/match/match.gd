@@ -33,7 +33,7 @@ func find_spawn_point(peer_id: int) -> Vector3:
 	# needs to be adjusted for defusal etc
 	var _client_info = clients[peer_id]
 	var spawn_points = get_tree().get_nodes_in_group("spawn_point").filter(func (spawn_point: Node) -> bool:
-		return (spawn_point as SpawnPoint).allow_in_deathmatch
+		return (spawn_point as SpawnPoint).allow_in_deathmatch and (spawn_point as Node3D).is_visible_in_tree()
 	)
 
 	if spawn_points.size() == 0:
@@ -45,14 +45,11 @@ func find_spawn_point(peer_id: int) -> Vector3:
 func s_player_died(peer_id: int) -> void:
 	var timer = Timer.new()
 	add_child(timer)
-	timer.one_shot = true
-	timer.wait_time = 1
-	timer.start()
-	print("started respawn timer")
-	timer.connect("timeout", func ():
-		print("respawning player")
-		player_mangaer.s_spawn_player(peer_id, find_spawn_point(peer_id))
-	)
+
+	await get_tree().create_timer(3.0).timeout
+	print("respawning player")
+	player_mangaer.s_spawn_player(peer_id, find_spawn_point(peer_id))
+	
 
 func s_start(map: String = "buffa") -> void:
 	running = true

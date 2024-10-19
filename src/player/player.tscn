@@ -1,6 +1,7 @@
 [gd_scene load_steps=30 format=3 uid="uid://cpw1sr25ca3m4"]
 
 [ext_resource type="Script" path="res://src/player/scripts/player.gd" id="1_4mqlm"]
+[ext_resource type="PackedScene" uid="uid://c6m3vy7sqy2ht" path="res://src/player/death_screen/death_screen.tscn" id="2_1nun8"]
 [ext_resource type="PackedScene" uid="uid://bmiw620bm21kw" path="res://src/player/view_model_camera.tscn" id="2_fgaq1"]
 [ext_resource type="PackedScene" uid="uid://iwlpamd20oko" path="res://addons/customizableCrosshair/crosshair/crosshair.tscn" id="3_grj5b"]
 [ext_resource type="PackedScene" uid="uid://uc200r5fuuec" path="res://src/components/health_component.tscn" id="4_3dxbr"]
@@ -10,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://b1nn0sl2b2t4w" path="res://assets/sounds/shotgun_fire.mp3" id="8_n54sh"]
 [ext_resource type="Script" path="res://src/components/network_sound_source/playable_sound.gd" id="9_odcss"]
 [ext_resource type="AudioStream" uid="uid://citpb065apa" path="res://assets/sounds/movement/jumpland.wav" id="10_rkopp"]
+[ext_resource type="AudioStream" uid="uid://cviwgim6kj6w3" path="res://assets/sounds/flesh_impact.wav" id="11_s27xi"]
 [ext_resource type="AudioStream" uid="uid://dfdystc2n7jj2" path="res://assets/sounds/movement/step.wav" id="11_ufxaa"]
 [ext_resource type="PackedScene" uid="uid://bwtudpfak386i" path="res://src/player/characters/character.tscn" id="12_dn87q"]
 [ext_resource type="AudioStream" uid="uid://bojkkwa5m44t0" path="res://assets/sounds/shotgun_cock.wav" id="13_iysbl"]
@@ -61,6 +63,11 @@ audio_stream = ExtResource("10_rkopp")
 script = ExtResource("9_odcss")
 name = "step"
 audio_stream = ExtResource("11_ufxaa")
+
+[sub_resource type="Resource" id="Resource_43c4c"]
+script = ExtResource("9_odcss")
+name = "bullet_impact"
+audio_stream = ExtResource("11_s27xi")
 
 [sub_resource type="Animation" id="Animation_il40y"]
 length = 0.001
@@ -188,6 +195,7 @@ audio_stream = ExtResource("13_iysbl")
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_4mqlm")
+death_screen = ExtResource("2_1nun8")
 
 [node name="PhysicsCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -226,6 +234,8 @@ cull_mask = 1047554
 replication_config = SubResource("SceneReplicationConfig_ngjyo")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("label") instance=ExtResource("4_3dxbr")]
+max_health = null
+health = null
 label = NodePath("../HUD/Health")
 
 [node name="HUD" type="Control" parent="."]
@@ -289,10 +299,10 @@ sound_source = NodePath("../WeaponSoundSource")
 ammo_label = NodePath("../HUD/Ammo")
 guns = Array[ExtResource("7_ks5gy")]([SubResource("Resource_i7nmf")])
 
-[node name="NetworkSoundSource" type="Node" parent="." node_paths=PackedStringArray("audio_stream_parent")]
+[node name="MovementSoundSource" type="Node" parent="." node_paths=PackedStringArray("audio_stream_parent")]
 script = ExtResource("8_ewumb")
 audio_stream_parent = NodePath("../MovementSoundLocation")
-audio_streams = Array[ExtResource("9_odcss")]([SubResource("Resource_6ka6j"), SubResource("Resource_fevv4")])
+audio_streams = Array[ExtResource("9_odcss")]([SubResource("Resource_6ka6j"), SubResource("Resource_fevv4"), SubResource("Resource_43c4c")])
 
 [node name="MovementSoundLocation" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.413464, 0)
@@ -325,4 +335,5 @@ audio_streams = Array[ExtResource("9_odcss")]([SubResource("Resource_xgssi"), Su
 [node name="WeaponSoundLocation" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22408, 0)
 
+[connection signal="on_damage" from="HealthComponent" to="." method="_on_health_component_on_damage"]
 [connection signal="on_death" from="HealthComponent" to="." method="on_died"]

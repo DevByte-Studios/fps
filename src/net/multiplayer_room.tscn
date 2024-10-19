@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bld8ct8mxkuv"]
+[gd_scene load_steps=8 format=3 uid="uid://bld8ct8mxkuv"]
 
 [ext_resource type="Script" path="res://src/net/multiplayer_room.gd" id="1_e4oo2"]
+[ext_resource type="Script" path="res://src/decals/DecalManager.gd" id="2_f8pam"]
 [ext_resource type="PackedScene" uid="uid://bkcclf55owtfx" path="res://src/net/match/match.tscn" id="3_d4j5o"]
+[ext_resource type="PackedScene" uid="uid://db5i480gb8nop" path="res://src/decals/blood.tscn" id="3_usicg"]
 [ext_resource type="PackedScene" uid="uid://cqge0b5j8indd" path="res://src/net/level_manager/level_manager.tscn" id="4_n6b5w"]
 [ext_resource type="PackedScene" uid="uid://dyiv2phty8616" path="res://src/net/player_manager/player_manager.tscn" id="5_0ax6j"]
 [ext_resource type="PackedScene" uid="uid://cpw1sr25ca3m4" path="res://src/player/player.tscn" id="5_4e74c"]
@@ -17,6 +19,11 @@ script = ExtResource("1_e4oo2")
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 17.2701, 16.5805)
 
 [node name="Level" type="Node3D" parent="GameWorld"]
+
+[node name="DecalManager" type="Node3D" parent="GameWorld"]
+unique_name_in_owner = true
+script = ExtResource("2_f8pam")
+blood_decal = ExtResource("3_usicg")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -60,8 +67,8 @@ level_container = NodePath("../GameWorld/Level")
 
 [node name="PlayerManager" parent="." node_paths=PackedStringArray("player_container") instance=ExtResource("5_0ax6j")]
 unique_name_in_owner = true
-player_prefab = ExtResource("5_4e74c")
 player_container = NodePath("../GameWorld/Players")
+player_prefab = ExtResource("5_4e74c")
 
 [connection signal="pressed" from="Control/Options/Host/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="Control/Options/Join/JoinButton" to="." method="_on_join_button_pressed"]

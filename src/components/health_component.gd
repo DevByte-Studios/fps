@@ -1,7 +1,7 @@
 class_name HealthComponent
 extends Node
 
-signal on_damage(amount: int)
+signal on_damage(amount: int, slowdown_multiplier: float)
 signal on_death()
 
 @export var max_health: int = 100
@@ -15,8 +15,8 @@ func update_label() -> void:
 func _ready():
 	update_label()
 
-func _on_damage(amount: int) -> void:
-	on_damage.emit(amount)
+func _on_damage(amount: int, slowdown_multiplier = 1.0) -> void:
+	on_damage.emit(amount, slowdown_multiplier)
 	health = max(0, health - amount)
 	if health == 0:
 		on_death.emit()

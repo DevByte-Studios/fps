@@ -11,7 +11,7 @@ const GRAVITY = -25
 @onready var head := $head
 @onready var camera := $head/Camera3D;
 
-@onready var sound_source: NetworkSoundSource = $NetworkSoundSource
+@onready var feet_sound_source: NetworkSoundSource = $MovementSoundSource
 
 @onready var standup_raycast = $CanStandUp
 
@@ -47,6 +47,8 @@ var jump_cayote_window = 0
 var is_in_air = false
 var highest_air_point = 0
 
+var speed_penalty = 0.0
+
 
 @export var is_crouching = false
 func update_animations():
@@ -66,7 +68,7 @@ func _physics_process(delta: float) -> void:
 		if is_in_air:
 			var fallen_height = highest_air_point - global_transform.origin.y
 			if fallen_height > .5:
-				sound_source.play_sound("land")
+				feet_sound_source.play_sound("land")
 			is_in_air = false
 			highest_air_point = 0
 
@@ -93,6 +95,8 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("left", "right", "forward", "backward")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
+	speed_penalty = clamp(speed_penalty - delta * 1.75, 0, 2) # 2
+
 	var is_walking = Input.is_action_pressed("walk")
 	var SPEED = 2.3 if is_walking else 5.0
 
@@ -102,6 +106,7 @@ func _physics_process(delta: float) -> void:
 	is_crouching = tries_crouching
 	visual_character.is_crouching = is_crouching
 
+	SPEED /= speed_penalty + 1
 
 	var last_frame_hor_mov = get_position_delta()
 	last_frame_hor_mov.y = 0
@@ -111,7 +116,7 @@ func _physics_process(delta: float) -> void:
 	if last_motion_can_produce_step and is_on_floor():
 		step_sound_build_up += last_frame_hor_mov.length() * delta
 		if step_sound_build_up > STEP_SOUND_INTERVAL:
-			sound_source.play_sound("step", 1, randf_range(0.8, 1.2))
+			feet_sound_source.play_sound("step", 1, randf_range(0.8, 1.2))
 			step_sound_build_up = 0
 
 	last_motion_can_produce_step = not is_walking and is_on_floor()
@@ -138,15 +143,35 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera.rotation.x = clamp(camera.rotation.x - event.relative.y * MOUSE_SENSITIVITY, -1.5, 1.5)
 
 
+@export var death_screen: PackedScene
 func on_died():
-	print("I died")
 	peer_on_died.rpc()
+	var death_screen_instance: Node3D = death_screen.instantiate()
+	get_tree().root.add_child(death_screen_instance)
+	death_screen_instance.global_transform.origin = camera.global_transform.origin
+	death_screen_instance.look_at(camera.global_transform.origin - camera.global_transform.basis.z, Vector3.UP)
+
 
 @onready var match_manager = get_tree().root.get_node("MultiplayerRoom").get_node("Match") as Match
 
 @rpc("any_peer", "call_local")
 func peer_on_died():
-	print("peer_on_died")
+	visual_character.get_parent().remove_child(visual_character)
+	get_parent().add_child(visual_character)
+	visual_character.global_transform = global_transform
+	visual_character.ragdoll()
+	print("ragdoll")
+
 	queue_free()
+
+
+
 	if multiplayer.is_server():
 		match_manager.s_player_died(peer_id)
+
+
+func _on_health_component_on_damage(amount: int, slowdown_multiplier) -> void:
+	print("I took damage")
+	print("bullet impact")
+	feet_sound_source.play_sound("bullet_impact", 2)
+	speed_penalty += amount * 0.1 * slowdown_multiplier

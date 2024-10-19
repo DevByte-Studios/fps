@@ -6,6 +6,7 @@ extends Node
 @export var view_model: Camera3D;
 @export var cooldown_timer: Timer;
 @export var sound_source: NetworkSoundSource;
+@export var decal_manager: DecalManager
 
 @export var ammo_label: Label;
 
@@ -78,7 +79,6 @@ func update_view_model():
 		else:
 			child.hide()
 
-@export var decal_manager: DecalManager
 func attack() -> void:
 	var current_weapon = get_current_weapon()
 	if !current_weapon:

@@ -291,13 +291,13 @@ label_settings = SubResource("LabelSettings_hicsj")
 
 [node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("head", "raycast", "view_model", "cooldown_timer", "sound_source", "ammo_label")]
 script = ExtResource("6_wjwxp")
-guns = Array[ExtResource("7_ks5gy")]([SubResource("Resource_i7nmf")])
 head = NodePath("../head")
 raycast = NodePath("../head/Camera3D/RayCast3D")
 view_model = NodePath("../head/SubViewportContainer/SubViewport/view_model_camera")
 cooldown_timer = NodePath("../CooldownTimer")
 sound_source = NodePath("../WeaponSoundSource")
 ammo_label = NodePath("../HUD/Ammo")
+guns = Array[ExtResource("7_ks5gy")]([SubResource("Resource_i7nmf")])
 
 [node name="MovementSoundSource" type="Node" parent="." node_paths=PackedStringArray("audio_stream_parent")]
 script = ExtResource("8_ewumb")

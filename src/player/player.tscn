@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cpw1sr25ca3m4"]
+[gd_scene load_steps=27 format=3 uid="uid://cpw1sr25ca3m4"]
 
 [ext_resource type="Script" path="res://src/player/scripts/player.gd" id="1_4mqlm"]
 [ext_resource type="PackedScene" uid="uid://bmiw620bm21kw" path="res://src/player/view_model_camera.tscn" id="2_fgaq1"]
@@ -39,17 +39,12 @@ view_model_name = "shotgun"
 magazine_size = 8
 reserve_ammo = 8
 has_crosshair = true
-fire_rate = 0.8
+fire_rate = 1.0
 weapon_type = 1
-base_damage = 8
+base_damage = 100
 armor_penetration = 0
 fire_sound = "shotgun_fire"
 reload_sound = "res://assets/sounds/shotgun_cock.wav"
-
-[sub_resource type="Resource" id="Resource_xgssi"]
-script = ExtResource("9_odcss")
-name = "shotgun_fire"
-audio_stream = ExtResource("8_n54sh")
 
 [sub_resource type="Resource" id="Resource_6ka6j"]
 script = ExtResource("9_odcss")
@@ -175,6 +170,11 @@ nodes/crouch_transition/position = Vector2(540, 140)
 nodes/output/position = Vector2(800, 220)
 node_connections = [&"crouch_transition", 0, &"Animation", &"crouch_transition", 1, &"Animation 2", &"output", 0, &"crouch_transition"]
 
+[sub_resource type="Resource" id="Resource_xgssi"]
+script = ExtResource("9_odcss")
+name = "shotgun_fire"
+audio_stream = ExtResource("8_n54sh")
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_4mqlm")
 
@@ -254,18 +254,14 @@ grow_vertical = 2
 [node name="Crosshair" parent="HUD/CenterContainer" instance=ExtResource("3_grj5b")]
 layout_mode = 2
 
-[node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("head", "raycast", "view_model", "cooldown_timer")]
+[node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("head", "raycast", "view_model", "cooldown_timer", "sound_source")]
 script = ExtResource("6_wjwxp")
 head = NodePath("../head")
 raycast = NodePath("../head/Camera3D/RayCast3D")
 view_model = NodePath("../head/SubViewportContainer/SubViewport/view_model_camera")
 cooldown_timer = NodePath("../CooldownTimer")
+sound_source = NodePath("../WeaponSoundSource")
 guns = Array[ExtResource("7_ks5gy")]([SubResource("Resource_i7nmf")])
-
-[node name="NetworkSoundSource" type="Node" parent="WeaponManager" node_paths=PackedStringArray("audio_stream_parent")]
-script = ExtResource("8_ewumb")
-audio_stream_parent = NodePath("../..")
-audio_streams = Array[ExtResource("9_odcss")]([SubResource("Resource_xgssi")])
 
 [node name="NetworkSoundSource" type="Node" parent="." node_paths=PackedStringArray("audio_stream_parent")]
 script = ExtResource("8_ewumb")
@@ -294,5 +290,13 @@ player_health_component = NodePath("../HealthComponent")
 raycasts_to_disable = [NodePath("../head/Camera3D/RayCast3D")]
 
 [node name="CooldownTimer" type="Timer" parent="."]
+
+[node name="WeaponSoundSource" type="Node" parent="." node_paths=PackedStringArray("audio_stream_parent")]
+script = ExtResource("8_ewumb")
+audio_stream_parent = NodePath("../WeaponSoundLocation")
+audio_streams = Array[ExtResource("9_odcss")]([SubResource("Resource_xgssi")])
+
+[node name="WeaponSoundLocation" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22408, 0)
 
 [connection signal="on_death" from="HealthComponent" to="." method="on_died"]

@@ -5,10 +5,9 @@ extends Node
 @export var raycast: RayCast3D;
 @export var view_model: Camera3D;
 @export var cooldown_timer: Timer;
+@export var sound_source: NetworkSoundSource;
 
 @export var guns: Array[WeaponConfig] = [];
-
-@onready var sound_source: NetworkSoundSource = $NetworkSoundSource
 
 var selected_weapon: String = "primary"
 
@@ -49,7 +48,7 @@ func set_current_weapon(slot: String) -> void:
 	# Check slot is dirrent to current active slot
 	if slot == selected_weapon:
 		return
-		
+
 	if slot in weapons:
 		if weapons[slot]:
 			selected_weapon = slot

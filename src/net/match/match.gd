@@ -33,7 +33,7 @@ func find_spawn_point(peer_id: int) -> Vector3:
 	# needs to be adjusted for defusal etc
 	var _client_info = clients[peer_id]
 	var spawn_points = get_tree().get_nodes_in_group("spawn_point").filter(func (spawn_point: Node) -> bool:
-		return (spawn_point as SpawnPoint).allow_in_deathmatch
+		return (spawn_point as SpawnPoint).allow_in_deathmatch and (spawn_point as Node3D).is_visible_in_tree()
 	)
 
 	if spawn_points.size() == 0:

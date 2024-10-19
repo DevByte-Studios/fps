@@ -68,6 +68,7 @@ func update_view_model():
 		else:
 			child.hide()
 
+@export var decal_manager: DecalManager
 func attack() -> void:
 	var current_weapon = get_current_weapon()
 	if !current_weapon:
@@ -88,7 +89,16 @@ func attack() -> void:
 		
 			if(collider is BulletHitbox):
 				collider._on_bullet_hit(current_weapon.weapon_type.base_damage)
-
+				var collision_point = raycast.get_collision_point()
+				var blood_dir = (raycast.global_transform.origin - collision_point).normalized()
+				decal_manager.spawn_blood(
+					collision_point,
+					blood_dir
+				)
+				decal_manager.spawn_blood(
+					collision_point,
+					(3 * Vector3.UP + blood_dir).normalized()
+				)
 		# Set the cooldown
 		current_weapon.can_fire = false
 		cooldown_timer.start(current_weapon.weapon_type.fire_rate)

@@ -23,7 +23,8 @@ func _ready() -> void:
 
 @rpc("call_local", "authority")
 func c_spawn_player(peer_id: int, spawn_location: Vector3) -> void:
-	var player = player_prefab.instantiate()
+	var player: Player = player_prefab.instantiate()
+	player.get_node("WeaponManager").decal_manager = %DecalManager
 	player.name = str(peer_id)
 	player_container.add_child(player)
 	player.global_transform.origin = spawn_location

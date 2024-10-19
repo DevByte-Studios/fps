@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://db5i480gb8nop"]
+
+[ext_resource type="Texture2D" uid="uid://dfrb27n75j44b" path="res://assets/textures/decals/blood_splatter.png" id="1_ior2d"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_i7fxm"]
+size = Vector3(0.2, 1.5, 0.2)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -7.57106e-08, 1.73206)
+size = Vector3(2, 3.46411, 2)
+texture_albedo = ExtResource("1_ior2d")
+cull_mask = 64
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Decal"]
+visible = false
+mesh = SubResource("BoxMesh_i7fxm")

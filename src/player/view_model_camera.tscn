@@ -1,7 +1,6 @@
-[gd_scene load_steps=73 format=4 uid="uid://bmiw620bm21kw"]
+[gd_scene load_steps=72 format=4 uid="uid://bmiw620bm21kw"]
 
 [ext_resource type="Material" uid="uid://csu0p2hwvltmv" path="res://resources/materials/shotgun_material.tres" id="1_2rhdw"]
-[ext_resource type="Script" path="res://src/player/scripts/weapon_manager/weapon_manager.gd" id="1_bux0y"]
 [ext_resource type="Material" uid="uid://br3y6k5vplrrv" path="res://resources/materials/hands_material.tres" id="2_0nixu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gv6ke"]
@@ -997,7 +996,6 @@ _data = {
 
 [node name="view_model_camera" type="Camera3D"]
 fov = 35.0
-script = ExtResource("1_bux0y")
 
 [node name="fps_rig" type="Node3D" parent="."]
 

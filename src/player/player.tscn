@@ -231,6 +231,7 @@ render_target_update_mode = 4
 [node name="view_model_camera" parent="head/SubViewportContainer/SubViewport" instance=ExtResource("2_fgaq1")]
 unique_name_in_owner = true
 cull_mask = 1047554
+script = null
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_ngjyo")

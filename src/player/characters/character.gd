@@ -2,6 +2,19 @@ class_name VisualCharacter
 extends Node3D
 
 
+@export var hitboxes: Array[BulletHitbox] = []
+
+@export var player_health_component: HealthComponent
+
+@export var raycasts_to_disable: Array[RayCast3D] = []
+
+func _ready():
+	for hitbox in hitboxes:
+		hitbox.health_component = player_health_component
+		hitbox.collision_layer = 2
+		for raycast in raycasts_to_disable:
+			raycast.add_exception(hitbox)
+
 @export var horizontal_speed: float = 0
 @export var is_falling: bool = false
 @export var is_crouching: bool = false

@@ -112,7 +112,6 @@ func _physics_process(delta: float) -> void:
 		step_sound_build_up += last_frame_hor_mov.length() * delta
 		if step_sound_build_up > STEP_SOUND_INTERVAL:
 			sound_source.play_sound("step", 1, randf_range(0.8, 1.2))
-			print("step")
 			step_sound_build_up = 0
 
 	last_motion_can_produce_step = not is_walking and is_on_floor()

@@ -105,7 +105,7 @@ func attack() -> void:
 
 		if raycast.is_colliding():
 			var collider = raycast.get_collider()
-		
+			print("Collider: ", collider)
 			if(collider is BulletHitbox):
 				collider._on_bullet_hit(current_weapon.weapon_type.base_damage)
 				var collision_point = raycast.get_collision_point()

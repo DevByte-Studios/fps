@@ -1,10 +1,14 @@
-[gd_scene load_steps=26 format=4 uid="uid://bwtudpfak386i"]
+[gd_scene load_steps=36 format=4 uid="uid://bwtudpfak386i"]
 
 [ext_resource type="Script" path="res://src/player/characters/character.gd" id="1_xyr5e"]
 [ext_resource type="AnimationLibrary" uid="uid://87s0sllm3yyd" path="res://assets/characters/animations/walking.fbx" id="1_ycr3a"]
 [ext_resource type="PackedScene" uid="uid://cv2pirqlts4bd" path="res://src/components/bullet_hitbox.tscn" id="2_2yg1h"]
+[ext_resource type="AnimationLibrary" uid="uid://dvhp0l4rsnkt4" path="res://assets/characters/animations/crouch_idle.fbx" id="2_df76c"]
 [ext_resource type="AnimationLibrary" uid="uid://c8ehjrk4w8h1w" path="res://assets/characters/animations/crouch_walk.fbx" id="2_elw7m"]
 [ext_resource type="AnimationLibrary" uid="uid://c0n56uytr4pkk" path="res://assets/characters/animations/falling.fbx" id="2_wtlt4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_76hlg"]
+albedo_color = Color(1, 0.388308, 0.316612, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q36ce"]
 
@@ -185,6 +189,9 @@ bind/50/pose = Transform3D(-1.49012e-08, -1.02445e-07, 1, -1, 0, -1.19209e-07, -
 bind/51/name = &"RightLittleDistal"
 bind/51/bone = -1
 bind/51/pose = Transform3D(-1.49012e-08, -1.04308e-07, 1, -1, 2.98023e-08, -1.19209e-07, -2.98023e-08, -1, -2.23517e-08, 0.000490877, -0.0165678, 0.000249737)
+
+[sub_resource type="Animation" id="Animation_r86t5"]
+length = 0.001
 
 [sub_resource type="Animation" id="Animation_xlldn"]
 resource_name = "mixamo_com"
@@ -531,9 +538,6 @@ tracks/47/keys = {
 "values": [&""]
 }
 
-[sub_resource type="Animation" id="Animation_r86t5"]
-length = 0.001
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_divg1"]
 _data = {
 "RESET": SubResource("Animation_r86t5"),
@@ -878,6 +882,9 @@ _data = {
 "legs_idle": SubResource("Animation_2dr70")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_c7lsv"]
+animation = &"crouch_idle/mixamo_com"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_whsxh"]
 animation = &"Custom/legs_idle"
 
@@ -897,6 +904,17 @@ input_1/auto_advance = false
 input_1/break_loop_at_end = false
 input_1/reset = true
 
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_g126m"]
+xfade_time = 0.2
+input_0/name = "Idle"
+input_0/auto_advance = false
+input_0/break_loop_at_end = false
+input_0/reset = true
+input_1/name = "Moving"
+input_1/auto_advance = false
+input_1/break_loop_at_end = false
+input_1/reset = true
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_yash7"]
 animation = &"falling/mixamo_com"
 
@@ -907,11 +925,11 @@ xfade_time = 0.06
 input_0/name = "Idle"
 input_0/auto_advance = false
 input_0/break_loop_at_end = false
-input_0/reset = true
+input_0/reset = false
 input_1/name = "Walking"
 input_1/auto_advance = false
 input_1/break_loop_at_end = false
-input_1/reset = true
+input_1/reset = false
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bstr8"]
 animation = &"walking/mixamo_com"
@@ -919,31 +937,59 @@ animation = &"walking/mixamo_com"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_037kk"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_wqn3y"]
-graph_offset = Vector2(-464.831, -82.2242)
+graph_offset = Vector2(-465.722, -117.196)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_whsxh")
 nodes/Animation/position = Vector2(-20, -100)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_c7lsv")
+"nodes/Animation 2/position" = Vector2(140, 240)
 nodes/CrouchWalk/node = SubResource("AnimationNodeAnimation_hjt6p")
-nodes/CrouchWalk/position = Vector2(140, 340)
+nodes/CrouchWalk/position = Vector2(-120, 460)
 nodes/Crouching_speed/node = SubResource("AnimationNodeTimeScale_es8n4")
-nodes/Crouching_speed/position = Vector2(580, 240)
+nodes/Crouching_speed/position = Vector2(240, 440)
 nodes/Crouching_transition/node = SubResource("AnimationNodeTransition_mkxyu")
-nodes/Crouching_transition/position = Vector2(920, 40)
+nodes/Crouching_transition/position = Vector2(920, 20)
+nodes/Crouching_walking/node = SubResource("AnimationNodeTransition_g126m")
+nodes/Crouching_walking/position = Vector2(520, 240)
 nodes/Falling_Anim/node = SubResource("AnimationNodeAnimation_yash7")
-nodes/Falling_Anim/position = Vector2(600, 460)
+nodes/Falling_Anim/position = Vector2(880, 360)
 nodes/Falling_strength/node = SubResource("AnimationNodeBlend2_5i2mv")
-nodes/Falling_strength/position = Vector2(1300, 100)
+nodes/Falling_strength/position = Vector2(1280, 100)
 nodes/Legs_transitions/node = SubResource("AnimationNodeTransition_yoeyv")
-nodes/Legs_transitions/position = Vector2(520, 0)
+nodes/Legs_transitions/position = Vector2(460, -40)
 nodes/Walking/node = SubResource("AnimationNodeAnimation_bstr8")
-nodes/Walking/position = Vector2(-180, 120)
+nodes/Walking/position = Vector2(-240, 120)
 nodes/Walking_speed/node = SubResource("AnimationNodeTimeScale_037kk")
-nodes/Walking_speed/position = Vector2(160, 80)
-nodes/output/position = Vector2(1620, 140)
-node_connections = [&"Crouching_speed", 0, &"CrouchWalk", &"Crouching_transition", 0, &"Legs_transitions", &"Crouching_transition", 1, &"Crouching_speed", &"Falling_strength", 0, &"Crouching_transition", &"Falling_strength", 1, &"Falling_Anim", &"Legs_transitions", 0, &"Animation", &"Legs_transitions", 1, &"Walking_speed", &"Walking_speed", 0, &"Walking", &"output", 0, &"Falling_strength"]
+nodes/Walking_speed/position = Vector2(120, 60)
+nodes/output/position = Vector2(1620, 100)
+node_connections = [&"Crouching_speed", 0, &"CrouchWalk", &"Crouching_transition", 0, &"Legs_transitions", &"Crouching_transition", 1, &"Crouching_walking", &"Crouching_walking", 0, &"Animation 2", &"Crouching_walking", 1, &"Crouching_speed", &"Falling_strength", 0, &"Crouching_transition", &"Falling_strength", 1, &"Falling_Anim", &"Legs_transitions", 0, &"Animation", &"Legs_transitions", 1, &"Walking_speed", &"Walking_speed", 0, &"Walking", &"output", 0, &"Falling_strength"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m1kdt"]
 radius = 0.00281155
 height = 0.00933396
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2jdg7"]
+radius = 0.00540246
+height = 0.0235953
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_vl0c0"]
+radius = 0.00275533
+height = 0.0151243
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6bt6v"]
+radius = 0.00189936
+height = 0.016492
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mb1ct"]
+radius = 0.00162328
+height = 0.00935393
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2v7pk"]
+radius = 0.00162328
+height = 0.0125195
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x16h8"]
+radius = 0.00162328
+height = 0.0132912
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_57uof"]
 properties/0/path = NodePath(".:horizontal_speed")
@@ -956,8 +1002,9 @@ properties/2/path = NodePath(".:is_crouching")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="Character" type="Node3D"]
+[node name="Character" type="Node3D" node_paths=PackedStringArray("hitboxes")]
 script = ExtResource("1_xyr5e")
+hitboxes = [NodePath("Colliders/Head/BulletHitbox"), NodePath("Colliders/Torso/BulletHitbox"), NodePath("Colliders/LeftUpperLeg/BulletHitbox"), NodePath("Colliders/LeftLowerLeg/BulletHitbox"), NodePath("Colliders/RightLowerLeg/BulletHitbox"), NodePath("Colliders/RightUpperLeg/BulletHitbox"), NodePath("Colliders/RightFoot/BulletHitbox"), NodePath("Colliders/LeftFoot/BulletHitbox"), NodePath("Colliders/LeftUpperArm/BulletHitbox"), NodePath("Colliders/LeftLowerArm/BulletHitbox"), NodePath("Colliders/RightLowerArm/BulletHitbox"), NodePath("Colliders/RightUpperArm/BulletHitbox")]
 
 [node name="T-Pose" type="Node3D" parent="."]
 transform = Transform3D(35.34, 0, 0, 0, 35.34, 0, 0, 0, 35.34, 0, 0.0240682, 0)
@@ -970,7 +1017,7 @@ bones/0/name = "Hips"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00310707, 0.000513589)
 bones/0/enabled = true
-bones/0/position = Vector3(-2.49012e-06, 0.0309209, -7.33957e-05)
+bones/0/position = Vector3(-2.49012e-06, 0.0309208, -7.33955e-05)
 bones/0/rotation = Quaternion(-2.56836e-06, -2.19825e-05, 0.000733442, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "Spine"
@@ -1055,7 +1102,7 @@ bones/12/parent = 11
 bones/12/rest = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0.000462288, 0.000255651, -0.000779011)
 bones/12/enabled = true
 bones/12/position = Vector3(0.000462288, 0.000255651, -0.000779011)
-bones/12/rotation = Quaternion(-1.49012e-08, 0, 0, 1)
+bones/12/rotation = Quaternion(-1.49011e-08, 0, 0, 1)
 bones/12/scale = Vector3(1, 1, 1)
 bones/13/name = "LeftThumbDistal"
 bones/13/parent = 12
@@ -1223,7 +1270,7 @@ bones/36/parent = 35
 bones/36/rest = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, -0.000462773, 0.000250486, -0.000738892)
 bones/36/enabled = true
 bones/36/position = Vector3(-0.000462773, 0.000250486, -0.000738892)
-bones/36/rotation = Quaternion(-1.49012e-08, 0, 0, 1)
+bones/36/rotation = Quaternion(-1.49011e-08, 0, 0, 1)
 bones/36/scale = Vector3(1, 1, 1)
 bones/37/name = "RightThumbDistal"
 bones/37/parent = 36
@@ -1423,6 +1470,7 @@ bones/64/rotation = Quaternion(0.000269691, 0.998395, 0.0472814, 0.0311632)
 bones/64/scale = Vector3(1, 1, 1)
 
 [node name="Cube_001" type="MeshInstance3D" parent="T-Pose/GeneralSkeleton"]
+material_override = SubResource("StandardMaterial3D_76hlg")
 mesh = SubResource("ArrayMesh_3lvbm")
 skin = SubResource("Skin_6ctv2")
 
@@ -1430,6 +1478,7 @@ skin = SubResource("Skin_6ctv2")
 libraries = {
 "": SubResource("AnimationLibrary_divg1"),
 "Custom": SubResource("AnimationLibrary_gyeoo"),
+"crouch_idle": ExtResource("2_df76c"),
 "crouch_walk": ExtResource("2_elw7m"),
 "falling": ExtResource("2_wtlt4"),
 "walking": ExtResource("1_ycr3a")
@@ -1443,6 +1492,9 @@ parameters/Crouching_speed/scale = 1.0
 parameters/Crouching_transition/current_state = "no"
 parameters/Crouching_transition/transition_request = ""
 parameters/Crouching_transition/current_index = 0
+parameters/Crouching_walking/current_state = "Idle"
+parameters/Crouching_walking/transition_request = "Idle"
+parameters/Crouching_walking/current_index = 0
 parameters/Falling_strength/blend_amount = 0.0
 parameters/Legs_transitions/current_state = "Idle"
 parameters/Legs_transitions/transition_request = ""
@@ -1452,17 +1504,172 @@ parameters/Walking_speed/scale = 1.0
 [node name="Colliders" type="Node3D" parent="."]
 
 [node name="Head" type="BoneAttachment3D" parent="Colliders"]
-transform = Transform3D(35.34, -0.0518397, -0.00155385, 0.0518397, 35.34, 0.000180392, 0.00155359, -0.000182671, 35.34, -0.00102967, 1.75396, -0.00960567)
+transform = Transform3D(35.34, -0.0518396, -0.00155386, 0.0518397, 35.34, 0.000180392, 0.00155359, -0.000182671, 35.34, -0.00102967, 1.75396, -0.00960568)
 bone_name = "Head"
 bone_idx = 5
 use_external_skeleton = true
 external_skeleton = NodePath("../../T-Pose/GeneralSkeleton")
 
 [node name="BulletHitbox" parent="Colliders/Head" instance=ExtResource("2_2yg1h")]
+damage_multiplier = 4.0
+is_headshot = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Colliders/Head/BulletHitbox"]
 transform = Transform3D(1, -2.27233e-10, -1.09139e-11, 5.59743e-12, 1, 9.09495e-13, 7.27596e-12, -1.36424e-12, 1, 2.79539e-06, 0.00190028, 0.000179458)
 shape = SubResource("CapsuleShape3D_m1kdt")
+
+[node name="Torso" type="BoneAttachment3D" parent="Colliders"]
+transform = Transform3D(35.34, -0.0518396, -0.00155386, 0.0518397, 35.34, 0.000180392, 0.00155359, -0.000182671, 35.34, -0.000433192, 1.34727, -0.00745449)
+bone_name = "Chest"
+bone_idx = 2
+use_external_skeleton = true
+external_skeleton = NodePath("../../T-Pose/GeneralSkeleton")
+
+[node name="BulletHitbox" parent="Colliders/Torso" instance=ExtResource("2_2yg1h")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Colliders/Torso/BulletHitbox"]
+transform = Transform3D(1, -2.27234e-10, -1.81899e-11, 5.59676e-12, 1, 9.09495e-13, 1.45519e-11, -1.36424e-12, 1, -7.51996e-07, -0.000512645, -2.61934e-09)
+shape = SubResource("CapsuleShape3D_2jdg7")
+
+[node name="LeftUpperLeg" type="BoneAttachment3D" parent="Colliders"]
+transform = Transform3D(-35.2677, -2.25985, 0.000940231, 2.2484, -35.0875, 3.56795, -0.227222, 3.56071, 35.1594, 0.0908241, 1.05158, -0.00024234)
+bone_name = "LeftUpperLeg"
+bone_idx = 55
+use_external_skeleton = true
+external_skeleton = NodePath("../../T-Pose/GeneralSkeleton")
+
+[node name="BulletHitbox" parent="Colliders/LeftUpperLeg" instance=ExtResource("2_2yg1h")]
+damage_multiplier = 0.75
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Colliders/LeftUpperLeg/BulletHitbox"]
+transform = Transform3D(0.999966, 0.000530099, -0.00825166, 0.000536953, 0.991674, 0.128774, 0.00825122, -0.128774, 0.99164, -0.000507813, 0.00740057, -0.000228887)
+shape = SubResource("CapsuleShape3D_vl0c0")
+
+[node name="LeftLowerLeg" type="BoneAttachment3D" parent="Colliders"]
+transform = Transform3D(35.2672, -2.26773, -0.0402114, -2.26153, -35.2074, 2.06, -0.172248, -2.05318, -35.2799, 0.0821886, 0.560754, 0.00905931)
+bone_name = "LeftLowerLeg"
+bone_idx = 56
+use_external_skeleton = true
+external_skeleton = NodePath("../../T-Pose/GeneralSkeleton")
+
+[node name="BulletHitbox" parent="Colliders/LeftLowerLeg" instance=ExtResource("2_2yg1h")]
+damage_multiplier = 0.75
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Colliders/LeftLowerLeg/BulletHitbox"]
+transform = Transform3D(0.997371, 0.0650963, 0.0318409, -0.0685875, 0.989806, 0.124829, -0.0233904, -0.126685, 0.991668, 0.00100091, 0.00731917, 0.000915758)
+shape = SubResource("CapsuleShape3D_6bt6v")
+
+[node name="RightLowerLeg" type="BoneAttachment3D" parent="Colliders"]
+transform = Transform3D(35.2671, 2.26875, 0.0485962, 2.25969, -35.1796, 2.49128, 0.20831, -2.48303, -35.252, -0.0822019, 0.560509, 0.0113144)
+bone_name = "RightLowerLeg"
+bone_idx = 61
+use_external_skeleton = true
+external_skeleton = NodePath("../../T-Pose/GeneralSkeleton")
+
+[node name="BulletHitbox" parent="Colliders/RightLowerLeg" instance=ExtResource("2_2yg1h")]
+damage_multiplier = 0.75
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Colliders/RightLowerLeg/BulletHitbox"]
+transform = Transform3D(0.998373, -0.0511608, 0.0252095, 0.0475058, 0.990529, 0.12883, -0.0315617, -0.127423, 0.991347, -0.00112002, 0.00732405, 0.00082942)
+shape = SubResource("CapsuleShape3D_6bt6v")
+
+[node name="RightUpperLeg" type="BoneAttachment3D" parent="Colliders"]
+transform = Transform3D(-35.2677, 2.25907, 0.00193787, -2.24567, -35.0618, 3.81332, 0.245685, 3.80539, 35.1337, -0.0908232, 1.05131, -0.000900218)
+bone_name = "RightUpperLeg"
+bone_idx = 60
+use_external_skeleton = true
+external_skeleton = NodePath("../../T-Pose/GeneralSkeleton")
+
+[node name="BulletHitbox" parent="Colliders/RightUpperLeg" instance=ExtResource("2_2yg1h")]
+damage_multiplier = 0.75
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Colliders/RightUpperLeg/BulletHitbox"]
+transform = Transform3D(0.996376, 0.0844142, 0.010467, -0.0850592, 0.988045, 0.128572, 0.00051146, -0.128996, 0.991645, 0.000518012, 0.00740223, -4.01968e-05)
+shape = SubResource("CapsuleShape3D_vl0c0")
+
+[node name="RightFoot" type="BoneAttachment3D" parent="Colliders"]
+transform = Transform3D(-35.34, -1.25069e-06, 2.33888e-06, 2.02517e-06, 3.10698e-05, 35.34, -1.34943e-06, 35.34, -3.13331e-05, -0.0908252, 0.116922, -0.0291669)
+bone_name = "RightFoot"
+bone_idx = 62
+use_external_skeleton = true
+external_skeleton = NodePath("../../T-Pose/GeneralSkeleton")
+
+[node name="BulletHitbox" parent="Colliders/RightFoot" instance=ExtResource("2_2yg1h")]
+damage_multiplier = 0.75
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Colliders/RightFoot/BulletHitbox"]
+transform = Transform3D(0.996376, 0.0844142, 0.0104669, -0.0846493, 0.996109, 0.0245264, -0.00835586, -0.0253233, 0.999644, -3.64096e-05, 0.0023822, -0.00172231)
+shape = SubResource("CapsuleShape3D_mb1ct")
+
+[node name="LeftFoot" type="BoneAttachment3D" parent="Colliders"]
+transform = Transform3D(-35.34, -4.63661e-06, 3.93798e-06, 3.46409e-06, -1.44817e-05, 35.34, -4.55844e-06, 35.34, 1.42184e-05, 0.0908235, 0.11689, -0.0291458)
+bone_name = "LeftFoot"
+bone_idx = 57
+use_external_skeleton = true
+external_skeleton = NodePath("../../T-Pose/GeneralSkeleton")
+
+[node name="BulletHitbox" parent="Colliders/LeftFoot" instance=ExtResource("2_2yg1h")]
+damage_multiplier = 0.75
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Colliders/LeftFoot/BulletHitbox"]
+transform = Transform3D(0.996376, 0.0844142, 0.0104669, -0.0846493, 0.996109, 0.0245264, -0.00835586, -0.0253233, 0.999644, -3.64096e-05, 0.0023822, -0.00172231)
+shape = SubResource("CapsuleShape3D_mb1ct")
+
+[node name="LeftUpperArm" type="BoneAttachment3D" parent="Colliders"]
+transform = Transform3D(0.00155386, 35.34, 0.0518396, -0.000180392, 0.0518397, -35.34, -35.34, 0.00155359, 0.000182671, 0.223198, 1.56835, -0.0134271)
+bone_name = "LeftUpperArm"
+bone_idx = 8
+use_external_skeleton = true
+external_skeleton = NodePath("../../T-Pose/GeneralSkeleton")
+
+[node name="BulletHitbox" parent="Colliders/LeftUpperArm" instance=ExtResource("2_2yg1h")]
+damage_multiplier = 0.75
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Colliders/LeftUpperArm/BulletHitbox"]
+transform = Transform3D(1, -1.21837e-05, -3.59828e-05, -2.01977e-05, 0.631704, -0.775209, 3.21754e-05, 0.775209, 0.631704, 1.01631e-07, 0.00195828, 0.00300462)
+shape = SubResource("CapsuleShape3D_2v7pk")
+
+[node name="LeftLowerArm" type="BoneAttachment3D" parent="Colliders"]
+transform = Transform3D(0.0518396, 35.34, -0.00155386, -35.34, 0.0518397, 0.000180392, 0.000182671, 0.00155359, 35.34, 0.360589, 1.37368, -0.0153215)
+bone_name = "LeftLowerArm"
+bone_idx = 9
+use_external_skeleton = true
+external_skeleton = NodePath("../../T-Pose/GeneralSkeleton")
+
+[node name="BulletHitbox" parent="Colliders/LeftLowerArm" instance=ExtResource("2_2yg1h")]
+damage_multiplier = 0.75
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Colliders/LeftLowerArm/BulletHitbox"]
+transform = Transform3D(0.540681, 0.841227, -3.46072e-05, -0.841228, 0.540681, 2.45405e-05, 3.93556e-05, 1.5844e-05, 1, 0.00541961, 0.00372943, -1.92056e-07)
+shape = SubResource("CapsuleShape3D_x16h8")
+
+[node name="RightLowerArm" type="BoneAttachment3D" parent="Colliders"]
+transform = Transform3D(-0.0518396, -35.34, -0.00155386, 35.34, -0.0518397, 0.000180392, -0.000182671, -0.00155359, 35.34, -0.36153, 1.37262, -0.0146863)
+bone_name = "RightLowerArm"
+bone_idx = 33
+use_external_skeleton = true
+external_skeleton = NodePath("../../T-Pose/GeneralSkeleton")
+
+[node name="BulletHitbox" parent="Colliders/RightLowerArm" instance=ExtResource("2_2yg1h")]
+damage_multiplier = 0.75
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Colliders/RightLowerArm/BulletHitbox"]
+transform = Transform3D(0.54024, -0.84151, 0, 0.841511, 0.54024, 0, -7.27596e-12, -1.81899e-12, 1, -0.00579624, 0.00405221, -2.35828e-07)
+shape = SubResource("CapsuleShape3D_x16h8")
+
+[node name="RightUpperArm" type="BoneAttachment3D" parent="Colliders"]
+transform = Transform3D(-0.00155386, -35.34, 0.0518396, 0.000180392, -0.0518397, -35.34, 35.34, -0.00155359, 0.000182671, -0.224711, 1.5677, -0.0141936)
+bone_name = "RightUpperArm"
+bone_idx = 32
+use_external_skeleton = true
+external_skeleton = NodePath("../../T-Pose/GeneralSkeleton")
+
+[node name="BulletHitbox" parent="Colliders/RightUpperArm" instance=ExtResource("2_2yg1h")]
+damage_multiplier = 0.75
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Colliders/RightUpperArm/BulletHitbox"]
+transform = Transform3D(1, -1.21837e-05, -3.59828e-05, -2.01977e-05, 0.631704, -0.775209, 3.21754e-05, 0.775209, 0.631704, 1.01631e-07, 0.00195828, 0.00300462)
+shape = SubResource("CapsuleShape3D_2v7pk")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_57uof")

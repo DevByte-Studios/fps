@@ -1,10 +1,9 @@
-[gd_scene load_steps=29 format=3 uid="uid://cpw1sr25ca3m4"]
+[gd_scene load_steps=25 format=3 uid="uid://cpw1sr25ca3m4"]
 
 [ext_resource type="Script" path="res://src/player/scripts/player.gd" id="1_4mqlm"]
 [ext_resource type="PackedScene" uid="uid://bmiw620bm21kw" path="res://src/player/view_model_camera.tscn" id="2_fgaq1"]
 [ext_resource type="PackedScene" uid="uid://iwlpamd20oko" path="res://addons/customizableCrosshair/crosshair/crosshair.tscn" id="3_grj5b"]
 [ext_resource type="PackedScene" uid="uid://uc200r5fuuec" path="res://src/components/health_component.tscn" id="4_3dxbr"]
-[ext_resource type="PackedScene" uid="uid://cv2pirqlts4bd" path="res://src/components/bullet_hitbox.tscn" id="5_dcomf"]
 [ext_resource type="Script" path="res://src/components/weapon_manager.gd" id="6_wjwxp"]
 [ext_resource type="Script" path="res://src/weapons/weapon_config.gd" id="7_ks5gy"]
 [ext_resource type="Script" path="res://src/components/network_sound_source/network_sound_source.gd" id="8_ewumb"]
@@ -15,13 +14,7 @@
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0obu1"]
 resource_local_to_scene = true
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gnoh6"]
-resource_local_to_scene = true
-albedo_color = Color(0, 0.572156, 0.893107, 1)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_beto0"]
-resource_local_to_scene = true
+radius = 0.378746
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ngjyo"]
 properties/0/path = NodePath(".:position")
@@ -33,8 +26,6 @@ properties/1/replication_mode = 1
 properties/2/path = NodePath(".:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_hwxbt"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_in7j1"]
 font_size = 60
@@ -89,26 +80,14 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PhysicsCollider/MeshInstance3D:mesh:height")
+tracks/2/path = NodePath("PhysicsCollider:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [2.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("BulletHitbox/CollisionShape3D:shape:height")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [2.0]
+"values": [Vector3(0, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_fxl5c"]
@@ -124,7 +103,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, -0.238062, 0)]
+"values": [Vector3(0, -0.353, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -136,31 +115,19 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [1.6]
+"values": [1.62461]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("PhysicsCollider/MeshInstance3D:mesh:height")
+tracks/2/path = NodePath("PhysicsCollider:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [1.6]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("BulletHitbox/CollisionShape3D:shape:height")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.6]
+"values": [Vector3(0, 0.809811, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0ot8i"]
@@ -205,11 +172,6 @@ script = ExtResource("1_4mqlm")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_0obu1")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PhysicsCollider"]
-visible = false
-material_override = SubResource("StandardMaterial3D_gnoh6")
-mesh = SubResource("CapsuleMesh_beto0")
-
 [node name="head" type="Node3D" parent="."]
 unique_name_in_owner = true
 
@@ -244,14 +206,6 @@ replication_config = SubResource("SceneReplicationConfig_ngjyo")
 
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("label") instance=ExtResource("4_3dxbr")]
 label = NodePath("../HUD/Health")
-
-[node name="BulletHitbox" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_dcomf")]
-collision_layer = 2
-health_component = NodePath("../HealthComponent")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BulletHitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_hwxbt")
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
@@ -318,7 +272,9 @@ parameters/crouch_transition/current_state = "standing"
 parameters/crouch_transition/transition_request = ""
 parameters/crouch_transition/current_index = 0
 
-[node name="Character" parent="." instance=ExtResource("12_dn87q")]
+[node name="Character" parent="." node_paths=PackedStringArray("player_health_component", "raycasts_to_disable") instance=ExtResource("12_dn87q")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+player_health_component = NodePath("../HealthComponent")
+raycasts_to_disable = [NodePath("../head/Camera3D/RayCast3D")]
 
 [connection signal="on_death" from="HealthComponent" to="." method="on_died"]

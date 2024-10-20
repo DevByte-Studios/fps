@@ -53,6 +53,8 @@ reload_time = 3.0
 has_crosshair = true
 base_damage = 24
 armor_penetration = 24
+vertical_recoil_strength = 9.0
+horizontal_recoil_strength = 4.0
 fire_sound = "ak47_fire"
 reload_sound = "ak47_reload"
 
@@ -69,6 +71,8 @@ reload_time = 3.0
 has_crosshair = true
 base_damage = 8
 armor_penetration = 0
+vertical_recoil_strength = 0.0
+horizontal_recoil_strength = 0.0
 fire_sound = "shotgun_fire"
 reload_sound = "shotgun_cock"
 
@@ -249,7 +253,7 @@ shape = SubResource("CylinderShape3D_0obu1")
 unique_name_in_owner = true
 
 [node name="Camera3D" type="Camera3D" parent="head"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.80006, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
 cull_mask = 1048573
 
 [node name="RayCast3D" type="RayCast3D" parent="head/Camera3D"]
@@ -347,9 +351,10 @@ label_settings = SubResource("LabelSettings_in7j1")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("head", "raycast", "view_model", "cooldown_timer", "sound_source", "ammo_label")]
+[node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("head", "camera", "raycast", "view_model", "cooldown_timer", "sound_source", "ammo_label")]
 script = ExtResource("6_wjwxp")
 head = NodePath("../head")
+camera = NodePath("../head/Camera3D")
 raycast = NodePath("../head/Camera3D/RayCast3D")
 view_model = NodePath("../head/SubViewportContainer/SubViewport/view_model_camera")
 cooldown_timer = NodePath("../CooldownTimer")

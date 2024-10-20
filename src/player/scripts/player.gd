@@ -17,6 +17,8 @@ const GRAVITY = -25
 
 @onready var visual_character = $Character as VisualCharacter
 
+@onready var weapon_manager = $WeaponManager as WeaponManager
+
 @rpc("authority", "call_local")
 func c_spawn_at(spawn_location: Vector3) -> void:
 	global_transform.origin = spawn_location
@@ -136,13 +138,21 @@ func _physics_process(delta: float) -> void:
 
 const MOUSE_SENSITIVITY = 0.0008;
 
+var base_target_look = Vector2.ZERO
 func _unhandled_input(event: InputEvent) -> void:
 	if not is_multiplayer_authority():
 		return
 
 	if event is InputEventMouseMotion:
-		rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
-		camera.rotation.x = clamp(camera.rotation.x - event.relative.y * MOUSE_SENSITIVITY, -1.5, 1.5)
+		base_target_look -= event.relative * MOUSE_SENSITIVITY
+		base_target_look.y = clamp(base_target_look.y, -1.5, 1.5)
+
+func _process(_delta: float) -> void:
+	if not is_multiplayer_authority():
+		return
+	var target_look = base_target_look + (weapon_manager.net_recoil / 2)
+	rotation.y = target_look.x
+	camera.rotation.x = target_look.y
 
 
 @export var death_screen: PackedScene

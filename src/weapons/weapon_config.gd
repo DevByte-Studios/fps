@@ -22,6 +22,11 @@ extends Resource
 @export var base_damage: int;
 @export var armor_penetration: int;
 
+@export_group("Recoil and Spread")
+
+@export var vertical_recoil_strength: float;
+@export var horizontal_recoil_strength: float;
+
 @export_group("Audio Streams")
 
 @export var fire_sound: String;

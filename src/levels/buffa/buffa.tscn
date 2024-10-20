@@ -165,15 +165,6 @@ use_collision = true
 collision_layer = 3
 size = Vector3(9.79485, 6.07912, 16.6168)
 
-[node name="CSGBox3D45" type="CSGBox3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.1119, 1.04409, -17.8612)
-visible = false
-layers = 65
-material_override = ExtResource("3_jgkqt")
-use_collision = true
-collision_layer = 3
-size = Vector3(15.7659, 2.45715, 7.54811)
-
 [node name="CSGBox3D35" type="CSGBox3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.236, 1.04409, 15.2654)
 layers = 65
@@ -685,27 +676,27 @@ layers = 65
 material_override = ExtResource("4_devk3")
 use_collision = true
 collision_layer = 3
-polygon = PackedVector2Array(-6.97343, -0.279222, -6.37275, 4.04186, 4.96418, -0.037487)
+polygon = PackedVector2Array(-6.97343, -0.279222, -6.37275, 4.04186, 5.12994, -0.14779)
 depth = 2.6
 smooth_faces = true
 
 [node name="CSGPolygon3D6" type="CSGPolygon3D" parent="Level"]
-transform = Transform3D(1, 0, -2.13163e-14, 0, 1, 0, 2.13163e-14, 0, 1, -13.8329, 0.0837664, -3.61984)
+transform = Transform3D(1, 0, -2.13163e-14, 0, 1, 0, 2.13163e-14, 0, 1, -13.8842, 0.0837664, -3.79909)
 layers = 65
 material_override = ExtResource("3_jgkqt")
 use_collision = true
 collision_layer = 3
-polygon = PackedVector2Array(-6.97343, -0.279222, -6.99991, 2.18669, 2.95292, 0.046589)
+polygon = PackedVector2Array(-6.97343, -0.279222, -6.99166, 2.1901, 2.95292, 0.046589)
 depth = 2.6
 smooth_faces = true
 
 [node name="CSGPolygon3D3" type="CSGPolygon3D" parent="Level"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 15.0323, 0.0743925, 8.3076)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 15.4046, 0.0743925, 8.3076)
 layers = 65
 material_override = ExtResource("4_devk3")
 use_collision = true
 collision_layer = 3
-polygon = PackedVector2Array(0.0308373, -0.0133806, -0.0165672, 1.18117, 1.44101, -0.0800057)
+polygon = PackedVector2Array(0.0308373, -0.0133806, -0.0131483, 1.18483, 1.44101, -0.0800057)
 depth = 2.75
 smooth_faces = true
 

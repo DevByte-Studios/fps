@@ -127,6 +127,8 @@ func _physics_process(delta: float) -> void:
 	velocity.x = lerp(velocity.x, direction.x * SPEED, lerper)
 	velocity.z = lerp(velocity.z, direction.z * SPEED, lerper)
 
+	visual_character.vertical_rotation = camera.rotation.x
+
 	move_and_slide()
 	update_animations()
 	last_delta = delta

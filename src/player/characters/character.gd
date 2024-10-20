@@ -12,6 +12,12 @@ extends Node3D
 
 @export var remove_on_ragdoll: Array[Node] = []
 
+@export var vertical_rotation: float = 0
+
+@export var vertical_look_bones: Array[String]
+
+@export var main_skeleton: Skeleton3D
+
 var is_ragdolled = false
 
 func ragdoll():
@@ -61,3 +67,8 @@ func _process(delta: float) -> void:
 
 	current_falling_strength = clamp(current_falling_strength, 0.0, 1.0)
 	anim_tree.set("parameters/Falling_strength/blend_amount", current_falling_strength)
+
+	# Vertical look
+	# we need to normalize the rotation to -1 to 1 from -90deg to 90deg in radians
+	var deg_vertical_rotation = rad_to_deg(vertical_rotation)
+	anim_tree.set("parameters/vertical_look/add_amount", deg_vertical_rotation / 90)

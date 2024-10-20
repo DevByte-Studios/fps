@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://i4cgon86xf7f"]
+
+[ext_resource type="Script" path="res://src/decals/tracer.gd" id="1_gxct5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xjoht"]
+emission_enabled = true
+emission = Color(0.695377, 0.473482, 0.283403, 1)
+emission_energy_multiplier = 4.86
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_cgami"]
+radius = 0.01
+height = 0.5
+radial_segments = 10
+rings = 1
+
+[node name="Tracer" type="Node3D"]
+script = ExtResource("1_gxct5")
+
+[node name="TravelVisual" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_xjoht")
+mesh = SubResource("CapsuleMesh_cgami")

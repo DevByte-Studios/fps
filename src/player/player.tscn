@@ -335,9 +335,10 @@ label_settings = SubResource("LabelSettings_in7j1")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("head", "raycast", "view_model", "cooldown_timer", "sound_source", "ammo_label")]
+[node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("head", "camera", "raycast", "view_model", "cooldown_timer", "sound_source", "ammo_label")]
 script = ExtResource("6_wjwxp")
 head = NodePath("../head")
+camera = NodePath("../head/Camera3D")
 raycast = NodePath("../head/Camera3D/RayCast3D")
 view_model = NodePath("../head/SubViewportContainer/SubViewport/view_model_camera")
 cooldown_timer = NodePath("../CooldownTimer")

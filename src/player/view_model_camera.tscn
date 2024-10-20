@@ -1,7 +1,7 @@
 [gd_scene load_steps=106 format=4 uid="uid://bmiw620bm21kw"]
 
-[ext_resource type="Material" uid="uid://csu0p2hwvltmv" path="res://resources/materials/shotgun_material.tres" id="1_2rhdw"]
-[ext_resource type="Material" uid="uid://br3y6k5vplrrv" path="res://resources/materials/hands_material.tres" id="2_0nixu"]
+[ext_resource type="Material" path="res://resources/materials/shotgun_material.tres" id="1_2rhdw"]
+[ext_resource type="Material" path="res://resources/materials/hands_material.tres" id="2_0nixu"]
 [ext_resource type="Texture2D" uid="uid://c8a65j1jvw1tj" path="res://assets/weapons/ak47/AK47_Base_Color.png" id="3_m6ip3"]
 [ext_resource type="Material" uid="uid://dwm60cmcqjv0y" path="res://resources/materials/default_knife/grip.tres" id="4_qpnsg"]
 [ext_resource type="Texture2D" uid="uid://cutcfip06ikno" path="res://assets/weapons/default_knife/default_knife_Grid.png" id="4_rf3po"]
@@ -1821,6 +1821,9 @@ material_override = ExtResource("1_2rhdw")
 mesh = SubResource("ArrayMesh_bbihh")
 skeleton = NodePath("")
 
+[node name="BarrelEnd" type="Marker3D" parent="fps_rig/shotgun/shotgun_model" groups=["barrel_end"]]
+transform = Transform3D(7.54979e-08, 0, -1, 0, 1, 0, 1, 0, 7.54979e-08, 0.447549, 0.196991, 0.00129348)
+
 [node name="left_hand" type="Node3D" parent="fps_rig/shotgun"]
 transform = Transform3D(-0.0493745, -0.0491041, -0.00803885, 0.0495053, -0.049618, -0.000977394, -0.00500555, -0.00636577, 0.0696282, 0.172075, -0.186109, -0.731812)
 
@@ -2085,6 +2088,7 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.102915, -0.0758237, -0.635055)
 
 [node name="AK_47" type="MeshInstance3D" parent="fps_rig/ak47/ak47_model"]
+layers = 2
 mesh = SubResource("ArrayMesh_4sc52")
 skeleton = NodePath("")
 
@@ -2107,6 +2111,9 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00560485, -0.0203329, 0.142312)
 mesh = SubResource("ArrayMesh_tpmqn")
 skeleton = NodePath("")
+
+[node name="BarrelEnd" type="Marker3D" parent="fps_rig/ak47/ak47_model/AK_47" groups=["barrel_end"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00524923, -0.305952)
 
 [node name="left_hand" type="Node3D" parent="fps_rig/ak47"]
 transform = Transform3D(-0.0338184, -0.0335076, -0.0118852, 0.0346537, -0.0347326, -0.000684181, -0.00794561, -0.0088653, 0.0476022, 0.110771, -0.134078, -0.670672)

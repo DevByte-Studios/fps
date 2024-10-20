@@ -124,12 +124,13 @@ func attack() -> void:
 			vert + randf_range(-0.1, 0.1) * vert # +- 10% of vertical recoil
 		)
 
+		var tracer_end = Vector3.ZERO
 		if raycast.is_colliding():
 			var collider = raycast.get_collider()
 			print("Collider: ", collider)
+			var collision_point = raycast.get_collision_point()
 			if(collider is BulletHitbox):
 				collider._on_bullet_hit(current_weapon.weapon_type.base_damage)
-				var collision_point = raycast.get_collision_point()
 				var blood_dir = (raycast.global_transform.origin - collision_point).normalized()
 				decal_manager.spawn_decal(
 					"blood",	
@@ -142,18 +143,38 @@ func attack() -> void:
 					(3 * Vector3.UP + blood_dir).normalized()
 				)
 			else:
-				var collision_point = raycast.get_collision_point()
 				var normal = raycast.get_collision_normal() * -1
 				decal_manager.spawn_decal(
 					"bullet_hole",
 					collision_point,
 					normal
 				)
+			tracer_end = collision_point
+		else:
+			tracer_end = raycast.global_transform.origin - raycast.global_transform.basis.y * 1000
+		
+		var gun_barrel_end = find_local_barrel_end()
+		var local_tracer_origin = gun_barrel_end if gun_barrel_end else raycast.global_transform.origin
+		decal_manager.spawn_tracer.rpc(raycast.global_transform.origin, tracer_end)
+		decal_manager.spawn_tracer(local_tracer_origin, tracer_end)
+			
 		# Set the cooldown
 		current_weapon.can_fire = false
 		cooldown_timer.start(current_weapon.weapon_type.fire_rate)
 	else:
 		reload()
+
+func find_local_barrel_end():
+	var possible_barrel_ends = get_tree().get_nodes_in_group("barrel_end")
+	for barrel_end in possible_barrel_ends:
+		if barrel_end.is_visible_in_tree():
+			var local_pos: Vector3 = barrel_end.global_transform.origin
+			# local_pos is relative to the camera and doesn't rotate with the camera
+			return camera.global_basis * local_pos + camera.global_transform.origin
+		else:
+			print("invisible")
+	return null
+
 
 func start_firing() -> void:
 	var current_weapon = get_current_weapon()

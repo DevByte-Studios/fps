@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bld8ct8mxkuv"]
+[gd_scene load_steps=10 format=3 uid="uid://bld8ct8mxkuv"]
 
 [ext_resource type="Script" path="res://src/net/multiplayer_room.gd" id="1_e4oo2"]
 [ext_resource type="Script" path="res://src/decals/DecalManager.gd" id="2_f8pam"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cjkft16ty3b00" path="res://src/decals/bullet_hole.tscn" id="4_rt8wv"]
 [ext_resource type="PackedScene" uid="uid://dyiv2phty8616" path="res://src/net/player_manager/player_manager.tscn" id="5_0ax6j"]
 [ext_resource type="PackedScene" uid="uid://cpw1sr25ca3m4" path="res://src/player/player.tscn" id="5_4e74c"]
+[ext_resource type="PackedScene" uid="uid://i4cgon86xf7f" path="res://src/decals/tracer.tscn" id="5_r6v8p"]
 
 [node name="MultiplayerRoom" type="Node"]
 script = ExtResource("1_e4oo2")
@@ -28,6 +29,7 @@ decals = {
 "blood": ExtResource("3_rtkuo"),
 "bullet_hole": ExtResource("4_rt8wv")
 }
+tracer = ExtResource("5_r6v8p")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

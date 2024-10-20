@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://usru868rkatd"
-path="res://.godot/imported/LVAA.glb-98fc80bc8c12cb9c9271cfe8968b2def.scn"
+uid="uid://kgh3gnjc21um"
+path="res://.godot/imported/new_hands.glb-c1a1f4c49d0362687fef6976f3f97a9c.scn"
 
 [deps]
 
-source_file="res://assets/weapons/LVAA.glb"
-dest_files=["res://.godot/imported/LVAA.glb-98fc80bc8c12cb9c9271cfe8968b2def.scn"]
+source_file="res://assets/weapons/new_hands.glb"
+dest_files=["res://.godot/imported/new_hands.glb-c1a1f4c49d0362687fef6976f3f97a9c.scn"]
 
 [params]
 

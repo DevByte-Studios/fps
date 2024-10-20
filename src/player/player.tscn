@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cpw1sr25ca3m4"]
+[gd_scene load_steps=39 format=3 uid="uid://cpw1sr25ca3m4"]
 
 [ext_resource type="Script" path="res://src/player/scripts/player.gd" id="1_4mqlm"]
 [ext_resource type="PackedScene" uid="uid://c6m3vy7sqy2ht" path="res://src/player/death_screen/death_screen.tscn" id="2_1nun8"]
@@ -71,6 +71,22 @@ base_damage = 8
 armor_penetration = 0
 fire_sound = "shotgun_fire"
 reload_sound = "shotgun_cock"
+
+[sub_resource type="Resource" id="Resource_lr4ev"]
+script = ExtResource("7_ks5gy")
+display_name = "Knife"
+model_name = "default_knife"
+view_model_name = "default_knife"
+magazine_size = 0
+reserve_ammo = 0
+fire_rate = 0.0
+weapon_type = 0
+reload_time = 0.0
+has_crosshair = true
+base_damage = 0
+armor_penetration = 0
+fire_sound = ""
+reload_sound = ""
 
 [sub_resource type="Resource" id="Resource_6ka6j"]
 script = ExtResource("9_odcss")
@@ -333,13 +349,13 @@ vertical_alignment = 1
 
 [node name="WeaponManager" type="Node" parent="." node_paths=PackedStringArray("head", "raycast", "view_model", "cooldown_timer", "sound_source", "ammo_label")]
 script = ExtResource("6_wjwxp")
-guns = Array[ExtResource("7_ks5gy")]([SubResource("Resource_2k3ob"), SubResource("Resource_i7nmf")])
 head = NodePath("../head")
 raycast = NodePath("../head/Camera3D/RayCast3D")
 view_model = NodePath("../head/SubViewportContainer/SubViewport/view_model_camera")
 cooldown_timer = NodePath("../CooldownTimer")
 sound_source = NodePath("../WeaponSoundSource")
 ammo_label = NodePath("../HUD/CanvasLayer/AmmoContainer/MarginContainer/GridContainer/Ammo")
+guns = Array[ExtResource("7_ks5gy")]([SubResource("Resource_2k3ob"), SubResource("Resource_i7nmf"), SubResource("Resource_lr4ev")])
 
 [node name="MovementSoundSource" type="Node" parent="." node_paths=PackedStringArray("audio_stream_parent")]
 script = ExtResource("8_ewumb")

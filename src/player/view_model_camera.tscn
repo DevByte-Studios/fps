@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=4 uid="uid://bmiw620bm21kw"]
+[gd_scene load_steps=109 format=4 uid="uid://bmiw620bm21kw"]
 
 [ext_resource type="Material" uid="uid://csu0p2hwvltmv" path="res://resources/materials/shotgun_material.tres" id="1_2rhdw"]
 [ext_resource type="Material" uid="uid://br3y6k5vplrrv" path="res://resources/materials/hands_material.tres" id="2_0nixu"]
@@ -1773,6 +1773,114 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_n7ptb")
 
+[sub_resource type="Animation" id="Animation_dyijp"]
+resource_name = "equip"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("default_knife:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.0966922, -0.18579, -0.777147)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("default_knife:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.02227, 1.07921, -1.10659)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("right_hand:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.162391, -0.174758, -0.433054)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("right_hand:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 2.32185)]
+}
+
+[sub_resource type="Animation" id="Animation_bwman"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("default_knife:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.0966922, -0.18579, -0.777147)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("default_knife:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.02227, 1.07921, -1.10659)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("right_hand:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.162391, -0.174758, -0.433054)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("right_hand:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 2.32185)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cbk6d"]
+_data = {
+"RESET": SubResource("Animation_bwman"),
+"equip": SubResource("Animation_dyijp")
+}
+
 [node name="view_model_camera" type="Camera3D"]
 fov = 35.0
 
@@ -2085,26 +2193,31 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.102915, -0.0758237, -0.635055)
 
 [node name="AK_47" type="MeshInstance3D" parent="fps_rig/ak47/ak47_model"]
+layers = 2
 mesh = SubResource("ArrayMesh_4sc52")
 skeleton = NodePath("")
 
 [node name="Magazine" type="MeshInstance3D" parent="fps_rig/ak47/ak47_model/AK_47"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00254692, -0.0627661, 0.160185)
+layers = 2
 mesh = SubResource("ArrayMesh_28tuk")
 skeleton = NodePath("")
 
 [node name="Trigger" type="MeshInstance3D" parent="fps_rig/ak47/ak47_model/AK_47"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00254692, -0.0461869, 0.242673)
+layers = 2
 mesh = SubResource("ArrayMesh_2lomw")
 skeleton = NodePath("")
 
 [node name="Selector_Switch" type="MeshInstance3D" parent="fps_rig/ak47/ak47_model/AK_47"]
 transform = Transform3D(1, 0, 0, 0, 0.999872, -0.0159946, 0, 0.0159946, 0.999872, 0.0129012, -0.0152228, 0.266924)
+layers = 2
 mesh = SubResource("ArrayMesh_rhoju")
 skeleton = NodePath("")
 
 [node name="Ejection_Port" type="MeshInstance3D" parent="fps_rig/ak47/ak47_model/AK_47"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00560485, -0.0203329, 0.142312)
+layers = 2
 mesh = SubResource("ArrayMesh_tpmqn")
 skeleton = NodePath("")
 
@@ -2363,35 +2476,162 @@ libraries = {
 "": SubResource("AnimationLibrary_nsuw3")
 }
 
-[node name="defaullt_knife" type="Node3D" parent="fps_rig"]
-visible = false
+[node name="default_knife" type="Node3D" parent="fps_rig"]
 
-[node name="default_knife" type="Node3D" parent="fps_rig/defaullt_knife"]
-transform = Transform3D(0.07, -0.0857321, 0.0857321, -4.32721e-09, -0.0989949, -0.0989949, 0.121244, 0.0494975, -0.0494975, 0.784405, -0.588946, -2.68637)
+[node name="default_knife" type="Node3D" parent="fps_rig/default_knife"]
+transform = Transform3D(0.0304218, 0.00331721, 0.015917, -0.0160457, 0.0090803, 0.0295463, -0.00118869, -0.0376756, 0.00852248, 0.0966922, -0.18579, -0.777147)
 
-[node name="Grip_low" type="MeshInstance3D" parent="fps_rig/defaullt_knife/default_knife"]
+[node name="Grip_low" type="MeshInstance3D" parent="fps_rig/default_knife/default_knife"]
 transform = Transform3D(1.41498e-07, 0.395658, 0, -0.395658, 1.41498e-07, 0, 0, 0, 0.395658, 0, 0, 0)
+layers = 2
 material_override = ExtResource("4_qpnsg")
 mesh = SubResource("ArrayMesh_bijpf")
 skeleton = NodePath("")
 
-[node name="Pommel_low" type="MeshInstance3D" parent="fps_rig/defaullt_knife/default_knife"]
+[node name="Pommel_low" type="MeshInstance3D" parent="fps_rig/default_knife/default_knife"]
 transform = Transform3D(1.41498e-07, 0.395658, 0, -0.395658, 1.41498e-07, 0, 0, 0, 0.395658, 0, 0, 0)
+layers = 2
 material_override = ExtResource("6_g2h4u")
 mesh = SubResource("ArrayMesh_h2uff")
 skeleton = NodePath("")
 
-[node name="Blade_low" type="MeshInstance3D" parent="fps_rig/defaullt_knife/default_knife"]
+[node name="Blade_low" type="MeshInstance3D" parent="fps_rig/default_knife/default_knife"]
 transform = Transform3D(1.41498e-07, 0.395658, 0, -0.395658, 1.41498e-07, 0, 0, 0, 0.395658, 0, 0, 0)
+layers = 2
 material_override = ExtResource("7_2qvgb")
 mesh = SubResource("ArrayMesh_yhrkx")
 skeleton = NodePath("")
 
-[node name="Cross-Guard_low" type="MeshInstance3D" parent="fps_rig/defaullt_knife/default_knife"]
+[node name="Cross-Guard_low" type="MeshInstance3D" parent="fps_rig/default_knife/default_knife"]
 transform = Transform3D(1.41498e-07, 0.395658, 0, -0.395658, 1.41498e-07, 0, 0, 0, 0.395658, 0, 0, 0)
+layers = 2
 material_override = ExtResource("8_o1qsa")
 mesh = SubResource("ArrayMesh_ujkcm")
 skeleton = NodePath("")
 
-[node name="hands" type="Node3D" parent="fps_rig/defaullt_knife"]
-transform = Transform3D(-0.144, 0, 1.25889e-08, 0, 0.144, 0, -1.25889e-08, 0, -0.144, -0.108654, -12.8773, -4.53797)
+[node name="right_hand" type="Node3D" parent="fps_rig/default_knife"]
+transform = Transform3D(-0.0430516, -0.0461155, 0, 0.0461155, -0.0430516, 0, 0, 0, 0.0630879, 0.162391, -0.174758, -0.433054)
+
+[node name="hand" type="MeshInstance3D" parent="fps_rig/default_knife/right_hand"]
+transform = Transform3D(0.851282, -0.414194, -0.32212, 0.416769, 0.906722, -0.0644834, 0.318782, -0.079356, 0.9445, 0, 0, -3.71071)
+layers = 2
+mesh = SubResource("ArrayMesh_llsxf")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0nixu")
+
+[node name="arm_lower" type="MeshInstance3D" parent="fps_rig/default_knife/right_hand/hand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.118854, 0.00119257)
+layers = 2
+mesh = SubResource("ArrayMesh_km2wx")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0nixu")
+
+[node name="index_0" type="MeshInstance3D" parent="fps_rig/default_knife/right_hand/hand"]
+transform = Transform3D(0.999294, -0.014367, -0.0347269, -0.014367, 0.707813, -0.706254, 0.0347269, 0.706254, 0.707107, 0.632815, -0.0549231, -1.84019)
+layers = 2
+mesh = SubResource("ArrayMesh_gt0x7")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0nixu")
+
+[node name="index_1" type="MeshInstance3D" parent="fps_rig/default_knife/right_hand/hand/index_0"]
+transform = Transform3D(0.998562, -0.0292424, -0.0449282, -0.0292424, 0.405286, -0.913722, 0.0449282, 0.913722, 0.403849, -0.00518489, -0.105448, -0.548605)
+layers = 2
+mesh = SubResource("ArrayMesh_esfb5")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0nixu")
+
+[node name="index_2" type="MeshInstance3D" parent="fps_rig/default_knife/right_hand/hand/index_0/index_1"]
+transform = Transform3D(0.998691, -0.026622, -0.043676, -0.026622, 0.458578, -0.888255, 0.043676, 0.888255, 0.457269, -0.00638866, -0.12993, -0.538078)
+layers = 2
+mesh = SubResource("ArrayMesh_e1vu4")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0nixu")
+
+[node name="middle_0" type="MeshInstance3D" parent="fps_rig/default_knife/right_hand/hand"]
+transform = Transform3D(0.999294, -0.014367, -0.0347269, -0.014367, 0.707813, -0.706254, 0.0347269, 0.706254, 0.707107, 0.221196, 0.036067, -1.93975)
+layers = 2
+mesh = SubResource("ArrayMesh_4wejw")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0nixu")
+
+[node name="middle_1" type="MeshInstance3D" parent="fps_rig/default_knife/right_hand/hand/middle_0"]
+transform = Transform3D(0.998562, -0.0292424, -0.0449282, -0.0292424, 0.405286, -0.913722, 0.0449282, 0.913722, 0.403849, 0.00418687, 0.0851493, -0.525791)
+layers = 2
+mesh = SubResource("ArrayMesh_w8uym")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0nixu")
+
+[node name="middle_2" type="MeshInstance3D" parent="fps_rig/default_knife/right_hand/hand/middle_0/middle_1"]
+transform = Transform3D(0.998691, -0.026622, -0.043676, -0.0266221, 0.458578, -0.888255, 0.043676, 0.888255, 0.457269, 0.00616765, 0.125432, -0.48673)
+layers = 2
+mesh = SubResource("ArrayMesh_v6xox")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0nixu")
+
+[node name="pinky_0" type="MeshInstance3D" parent="fps_rig/default_knife/right_hand/hand"]
+transform = Transform3D(0.999294, -0.014367, -0.0347269, -0.014367, 0.707813, -0.706254, 0.0347269, 0.706254, 0.707107, -0.637584, -0.0135901, -1.90745)
+layers = 2
+mesh = SubResource("ArrayMesh_fmojl")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0nixu")
+
+[node name="pinky_1" type="MeshInstance3D" parent="fps_rig/default_knife/right_hand/hand/pinky_0"]
+transform = Transform3D(0.998562, -0.0292424, -0.0449282, -0.0292424, 0.405286, -0.913722, 0.0449282, 0.913722, 0.403849, -0.00242376, -0.0492973, -0.581505)
+layers = 2
+mesh = SubResource("ArrayMesh_bcxaw")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0nixu")
+
+[node name="pinky_2" type="MeshInstance3D" parent="fps_rig/default_knife/right_hand/hand/pinky_0/pinky_1"]
+transform = Transform3D(0.998691, -0.026622, -0.043676, -0.0266221, 0.458578, -0.888255, 0.043676, 0.888255, 0.457269, -0.00437188, -0.0889053, -0.576604)
+layers = 2
+mesh = SubResource("ArrayMesh_jrcns")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0nixu")
+
+[node name="ring_0" type="MeshInstance3D" parent="fps_rig/default_knife/right_hand/hand"]
+transform = Transform3D(0.999294, -0.014367, -0.0347269, -0.014367, 0.707813, -0.706254, 0.0347269, 0.706254, 0.707107, -0.220015, 0.0324447, -1.9451)
+layers = 2
+mesh = SubResource("ArrayMesh_5n47a")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0nixu")
+
+[node name="ring_1" type="MeshInstance3D" parent="fps_rig/default_knife/right_hand/hand/ring_0"]
+transform = Transform3D(0.998562, -0.0292424, -0.0449282, -0.0292424, 0.405286, -0.913722, 0.0449282, 0.913722, 0.403849, 0.00342226, 0.0695953, -0.547132)
+layers = 2
+mesh = SubResource("ArrayMesh_1mfik")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0nixu")
+
+[node name="ring_2" type="MeshInstance3D" parent="fps_rig/default_knife/right_hand/hand/ring_0/ring_1"]
+transform = Transform3D(0.998691, -0.026622, -0.043676, -0.0266221, 0.458578, -0.888255, 0.043676, 0.888255, 0.457269, 0.00459266, 0.0934038, -0.514598)
+layers = 2
+mesh = SubResource("ArrayMesh_lrkfd")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0nixu")
+
+[node name="thumb_0" type="MeshInstance3D" parent="fps_rig/default_knife/right_hand/hand"]
+transform = Transform3D(1.19867, 0, 0, 0, 1.19867, 0, 0, 0, 1.19867, 0.71163, -0.0538707, -0.365427)
+layers = 2
+mesh = SubResource("ArrayMesh_2oc0k")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0nixu")
+
+[node name="thumb_1" type="MeshInstance3D" parent="fps_rig/default_knife/right_hand/hand/thumb_0"]
+transform = Transform3D(0.499969, -0.865971, -0.0112222, 0.866026, 0.5, 4.90539e-10, 0.00561112, -0.00971874, 0.999937, 0.418848, -3.57628e-07, -0.541475)
+layers = 2
+mesh = SubResource("ArrayMesh_qgljk")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0nixu")
+
+[node name="thumb_2" type="MeshInstance3D" parent="fps_rig/default_knife/right_hand/hand/thumb_0/thumb_1"]
+transform = Transform3D(0.989263, 0.0185972, 0.144959, 0.0185971, 0.967789, -0.251076, -0.144959, 0.251076, 0.957052, 0.286444, 0, -0.397434)
+layers = 2
+mesh = SubResource("ArrayMesh_yaxw2")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_0nixu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="fps_rig/default_knife"]
+libraries = {
+"": SubResource("AnimationLibrary_cbk6d")
+}

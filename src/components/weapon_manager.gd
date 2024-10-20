@@ -36,7 +36,7 @@ func _ready() -> void:
 	weapons = {
 		"primary": WeaponInstance._new(guns[0]),
 		"secondary": null,
-		"melee": null
+		"melee": WeaponInstance._new(guns[2])
 	}
 
 	update_view_model()
@@ -174,7 +174,7 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("weapon_secondary"):
 		set_current_weapon("secondary")
 	elif event.is_action_pressed("weapon_knife"):
-		set_current_weapon("knife")
+		set_current_weapon("melee")
 	elif event.is_action_pressed("primary_attack"):
 		start_firing()
 	elif event.is_action_released("primary_attack"):

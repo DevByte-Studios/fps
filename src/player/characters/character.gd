@@ -38,7 +38,6 @@ func _ready():
 		for pot_node in bone_att.get_children():
 			if pot_node is BulletHitbox:
 				var hitbox = pot_node as BulletHitbox
-				print("Setting health component")
 				hitbox.health_component = player_health_component
 				hitbox.collision_layer = 2
 				for raycast in raycasts_to_disable:

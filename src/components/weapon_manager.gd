@@ -16,11 +16,14 @@ var selected_weapon: String = "primary"
 
 var weapons = {}
 
+var is_firing_automatic = false
+@onready var automatic_fire_timer = $AutomaticFireTimer
+
 func _process(_delta: float) -> void:
 	# Update ammo label
 	var current_weapon = get_current_weapon()
 	if current_weapon:
-		ammo_label.text = str(current_weapon.ammo) + "/" + str(current_weapon.weapon_type.magazine_size)
+		ammo_label.text = str(current_weapon.ammo) + "/" + str(current_weapon.weapon_type.reserve_ammo)
 	else:
 		ammo_label.text = "0/0"
 
@@ -43,6 +46,12 @@ func _ready() -> void:
 	# Initialize timer
 	cooldown_timer.one_shot = true
 	cooldown_timer.connect("timeout", Callable(self, "_on_cooldown_timer_timeout"))
+
+	# Initialize automatic fire timer
+	automatic_fire_timer = Timer.new()
+	automatic_fire_timer.one_shot = true
+	automatic_fire_timer.connect("timeout", Callable(self, "_on_AutomaticFireTimer_timeout"))
+	add_child(automatic_fire_timer)
 
 func get_current_weapon() -> WeaponInstance:
 	return weapons[selected_weapon]
@@ -74,7 +83,7 @@ func set_current_weapon(slot: String) -> void:
 	
 func update_view_model():
 	for child in view_model.get_node('fps_rig').get_children():
-		if child.name.to_lower() == weapons[selected_weapon].weapon_type.model_name.to_lower():
+		if child.name.to_lower() == weapons[selected_weapon].weapon_type.view_model_name.to_lower():
 			child.show()
 		else:
 			child.hide()
@@ -115,6 +124,26 @@ func attack() -> void:
 	else:
 		reload()
 
+func start_firing() -> void:
+	var current_weapon = get_current_weapon()
+	if current_weapon and current_weapon.weapon_type.weapon_type == WeaponConfig.WeaponType.AUTOMATIC:
+		is_firing_automatic = true
+		automatic_fire()
+	elif current_weapon and current_weapon.weapon_type.weapon_type == WeaponConfig.WeaponType.SEMI_AUTOMATIC:
+		attack()
+
+func stop_firing() -> void:
+	is_firing_automatic = false
+	automatic_fire_timer.stop()
+
+func automatic_fire() -> void:
+	if is_firing_automatic:
+		attack()
+		automatic_fire_timer.start(get_current_weapon().weapon_type.fire_rate)
+
+func _on_AutomaticFireTimer_timeout() -> void:
+	automatic_fire()
+
 func _on_cooldown_timer_timeout() -> void:
 	get_current_weapon().can_fire = true
 
@@ -147,7 +176,9 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("weapon_knife"):
 		set_current_weapon("knife")
 	elif event.is_action_pressed("primary_attack"):
-		attack()
+		start_firing()
+	elif event.is_action_released("primary_attack"):
+		stop_firing()
 	elif event.is_action_pressed("reload"):
 		reload()
 

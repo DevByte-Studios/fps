@@ -31,7 +31,6 @@ func _process(delta: float) -> void:
 	recoil_time = move_toward(recoil_time, 0, delta * 0.005)
 
 	# Update the raycast
-	print(raycast.rotation.x)
 	raycast.rotation.y = net_recoil.x / 2
 	raycast.rotation.x = net_recoil.y / 2 + deg_to_rad(90)
 

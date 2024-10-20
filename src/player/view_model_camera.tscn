@@ -1,7 +1,7 @@
 [gd_scene load_steps=109 format=4 uid="uid://bmiw620bm21kw"]
 
-[ext_resource type="Material" path="res://resources/materials/shotgun_material.tres" id="1_2rhdw"]
-[ext_resource type="Material" path="res://resources/materials/hands_material.tres" id="2_0nixu"]
+[ext_resource type="Material" uid="uid://csu0p2hwvltmv" path="res://resources/materials/shotgun_material.tres" id="1_2rhdw"]
+[ext_resource type="Material" uid="uid://br3y6k5vplrrv" path="res://resources/materials/hands_material.tres" id="2_0nixu"]
 [ext_resource type="Texture2D" uid="uid://c8a65j1jvw1tj" path="res://assets/weapons/ak47/AK47_Base_Color.png" id="3_m6ip3"]
 [ext_resource type="Material" uid="uid://dwm60cmcqjv0y" path="res://resources/materials/default_knife/grip.tres" id="4_qpnsg"]
 [ext_resource type="Texture2D" uid="uid://cutcfip06ikno" path="res://assets/weapons/default_knife/default_knife_Grid.png" id="4_rf3po"]
@@ -1773,8 +1773,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_n7ptb")
 
-[sub_resource type="Animation" id="Animation_dyijp"]
-resource_name = "equip"
+[sub_resource type="Animation" id="Animation_bwman"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1824,8 +1824,8 @@ tracks/3/keys = {
 "values": [Vector3(0, 0, 2.32185)]
 }
 
-[sub_resource type="Animation" id="Animation_bwman"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_dyijp"]
+resource_name = "equip"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -2485,7 +2485,7 @@ libraries = {
 [node name="default_knife" type="Node3D" parent="fps_rig"]
 
 [node name="default_knife" type="Node3D" parent="fps_rig/default_knife"]
-transform = Transform3D(0.0304218, 0.00331721, 0.015917, -0.0160457, 0.0090803, 0.0295463, -0.00118869, -0.0376756, 0.00852248, 0.0966922, -0.18579, -0.777147)
+transform = Transform3D(0.0304217, 0.0033171, 0.0159171, -0.0160458, 0.00908034, 0.0295462, -0.00118883, -0.0376756, 0.00852246, 0.0966922, -0.18579, -0.777147)
 
 [node name="Grip_low" type="MeshInstance3D" parent="fps_rig/default_knife/default_knife"]
 transform = Transform3D(1.41498e-07, 0.395658, 0, -0.395658, 1.41498e-07, 0, 0, 0, 0.395658, 0, 0, 0)
@@ -2516,7 +2516,7 @@ mesh = SubResource("ArrayMesh_ujkcm")
 skeleton = NodePath("")
 
 [node name="right_hand" type="Node3D" parent="fps_rig/default_knife"]
-transform = Transform3D(-0.0430516, -0.0461155, 0, 0.0461155, -0.0430516, 0, 0, 0, 0.0630879, 0.162391, -0.174758, -0.433054)
+transform = Transform3D(-0.0430518, -0.0461154, 0, 0.0461154, -0.0430518, 0, 0, 0, 0.0630879, 0.162391, -0.174758, -0.433054)
 
 [node name="hand" type="MeshInstance3D" parent="fps_rig/default_knife/right_hand"]
 transform = Transform3D(0.851282, -0.414194, -0.32212, 0.416769, 0.906722, -0.0644834, 0.318782, -0.079356, 0.9445, 0, 0, -3.71071)

@@ -143,7 +143,7 @@ func attack() -> void:
 				)
 			else:
 				var collision_point = raycast.get_collision_point()
-				var normal = raycast.get_collision_normal()
+				var normal = raycast.get_collision_normal() * -1
 				decal_manager.spawn_decal(
 					"bullet_hole",
 					collision_point,

@@ -5,10 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://bkcclf55owtfx" path="res://src/net/match/match.tscn" id="3_d4j5o"]
 [ext_resource type="PackedScene" uid="uid://db5i480gb8nop" path="res://src/decals/blood.tscn" id="3_rtkuo"]
 [ext_resource type="PackedScene" uid="uid://cqge0b5j8indd" path="res://src/net/level_manager/level_manager.tscn" id="4_n6b5w"]
-[ext_resource type="PackedScene" path="res://src/decals/bullet_hole.tscn" id="4_rt8wv"]
+[ext_resource type="PackedScene" uid="uid://cjkft16ty3b00" path="res://src/decals/bullet_hole.tscn" id="4_rt8wv"]
 [ext_resource type="PackedScene" uid="uid://dyiv2phty8616" path="res://src/net/player_manager/player_manager.tscn" id="5_0ax6j"]
 [ext_resource type="PackedScene" uid="uid://cpw1sr25ca3m4" path="res://src/player/player.tscn" id="5_4e74c"]
-[ext_resource type="PackedScene" path="res://src/decals/tracer.tscn" id="5_r6v8p"]
+[ext_resource type="PackedScene" uid="uid://i4cgon86xf7f" path="res://src/decals/tracer.tscn" id="5_r6v8p"]
 
 [node name="MultiplayerRoom" type="Node"]
 script = ExtResource("1_e4oo2")

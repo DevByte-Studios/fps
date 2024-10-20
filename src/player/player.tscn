@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cpw1sr25ca3m4"]
+[gd_scene load_steps=38 format=3 uid="uid://cpw1sr25ca3m4"]
 
 [ext_resource type="Script" path="res://src/player/scripts/player.gd" id="1_4mqlm"]
 [ext_resource type="PackedScene" uid="uid://c6m3vy7sqy2ht" path="res://src/player/death_screen/death_screen.tscn" id="2_1nun8"]
@@ -15,6 +15,8 @@
 [ext_resource type="AudioStream" uid="uid://dfdystc2n7jj2" path="res://assets/sounds/movement/step.wav" id="11_ufxaa"]
 [ext_resource type="PackedScene" uid="uid://bwtudpfak386i" path="res://src/player/characters/character.tscn" id="12_dn87q"]
 [ext_resource type="AudioStream" uid="uid://bojkkwa5m44t0" path="res://assets/sounds/shotgun_cock.wav" id="13_iysbl"]
+[ext_resource type="AudioStream" uid="uid://blxf7g0abgt11" path="res://assets/sounds/weapons/ak47/weapon-sfx-m4-rifle.wav" id="16_jvh66"]
+[ext_resource type="AudioStream" uid="uid://1818sn3f4o6p" path="res://assets/sounds/weapons/ak47/ak-47-reload-sound-effect.wav" id="17_rsm8k"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_0obu1"]
 resource_local_to_scene = true
@@ -37,6 +39,22 @@ font_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_in7j1"]
 font_size = 24
+
+[sub_resource type="Resource" id="Resource_2k3ob"]
+script = ExtResource("7_ks5gy")
+display_name = "AK-47"
+model_name = "ak47"
+view_model_name = "ak47"
+magazine_size = 30
+reserve_ammo = 90
+fire_rate = 0.1
+weapon_type = 0
+reload_time = 3.0
+has_crosshair = true
+base_damage = 24
+armor_penetration = 24
+fire_sound = "ak47_fire"
+reload_sound = "ak47_reload"
 
 [sub_resource type="Resource" id="Resource_i7nmf"]
 script = ExtResource("7_ks5gy")
@@ -193,6 +211,16 @@ script = ExtResource("9_odcss")
 name = "shotgun_cock"
 audio_stream = ExtResource("13_iysbl")
 
+[sub_resource type="Resource" id="Resource_sqhko"]
+script = ExtResource("9_odcss")
+name = "ak47_fire"
+audio_stream = ExtResource("16_jvh66")
+
+[sub_resource type="Resource" id="Resource_56tkp"]
+script = ExtResource("9_odcss")
+name = "ak47_reload"
+audio_stream = ExtResource("17_rsm8k")
+
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_4mqlm")
 death_screen = ExtResource("2_1nun8")
@@ -311,7 +339,7 @@ view_model = NodePath("../head/SubViewportContainer/SubViewport/view_model_camer
 cooldown_timer = NodePath("../CooldownTimer")
 sound_source = NodePath("../WeaponSoundSource")
 ammo_label = NodePath("../HUD/CanvasLayer/AmmoContainer/MarginContainer/GridContainer/Ammo")
-guns = Array[ExtResource("7_ks5gy")]([SubResource("Resource_i7nmf")])
+guns = Array[ExtResource("7_ks5gy")]([SubResource("Resource_2k3ob"), SubResource("Resource_i7nmf")])
 
 [node name="MovementSoundSource" type="Node" parent="." node_paths=PackedStringArray("audio_stream_parent")]
 script = ExtResource("8_ewumb")
@@ -344,7 +372,7 @@ raycasts_to_disable = [NodePath("../head/Camera3D/RayCast3D")]
 [node name="WeaponSoundSource" type="Node" parent="." node_paths=PackedStringArray("audio_stream_parent")]
 script = ExtResource("8_ewumb")
 audio_stream_parent = NodePath("../WeaponSoundLocation")
-audio_streams = Array[ExtResource("9_odcss")]([SubResource("Resource_xgssi"), SubResource("Resource_w5fjy")])
+audio_streams = Array[ExtResource("9_odcss")]([SubResource("Resource_xgssi"), SubResource("Resource_w5fjy"), SubResource("Resource_sqhko"), SubResource("Resource_56tkp")])
 
 [node name="WeaponSoundLocation" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22408, 0)

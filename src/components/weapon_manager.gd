@@ -139,7 +139,7 @@ func stop_firing() -> void:
 func automatic_fire() -> void:
 	if is_firing_automatic:
 		attack()
-		automatic_fire_timer.start(get_current_weapon().weapon_type.fire_rate)
+		automatic_fire_timer.start(0.0001)
 
 func _on_AutomaticFireTimer_timeout() -> void:
 	automatic_fire()

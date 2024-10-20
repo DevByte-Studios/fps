@@ -2,15 +2,15 @@ class_name VisualCharacter
 extends Node3D
 
 
-@export var hitboxes: Array[BulletHitbox] = []
+@export var hitbox_parent: Node3D
 
 @export var player_health_component: HealthComponent
 
-@export var raycasts_to_disable: Array[RayCast3D] = []
+@export var raycasts_to_disable: Array[RayCast3D]
 
 @export var physical_bones_controller: PhysicalBoneSimulator3D
 
-@export var remove_on_ragdoll: Array[Node] = []
+@export var remove_on_ragdoll: Array[Node]
 
 @export var vertical_rotation: float = 0
 
@@ -34,11 +34,15 @@ func ragdoll():
 
 
 func _ready():
-	for hitbox in hitboxes:
-		hitbox.health_component = player_health_component
-		hitbox.collision_layer = 2
-		for raycast in raycasts_to_disable:
-			raycast.add_exception(hitbox)
+	for bone_att in hitbox_parent.get_children():
+		for pot_node in bone_att.get_children():
+			if pot_node is BulletHitbox:
+				var hitbox = pot_node as BulletHitbox
+				print("Setting health component")
+				hitbox.health_component = player_health_component
+				hitbox.collision_layer = 2
+				for raycast in raycasts_to_disable:
+					raycast.add_exception(hitbox)
 
 @export var horizontal_speed: float = 0
 @export var is_falling: bool = false

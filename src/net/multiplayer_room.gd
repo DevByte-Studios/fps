@@ -13,6 +13,12 @@ func _ready() -> void:
 	for map in (%LevelManager as LevelManager).levels:
 		map_selector.add_item(map.level_name)
 
+	var args = Array(OS.get_cmdline_args())
+	if args.has("server"):
+		_on_host_button_pressed()
+	elif args.has("client"):
+		_on_join_button_pressed()
+
 func _on_peer_connected(peer_id: int) -> void:
 	if multiplayer.is_server():
 		match_manager.client_connected(peer_id)
